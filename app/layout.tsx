@@ -1,4 +1,7 @@
+import Header from '@/components/Header'
 import './globals.css'
+import { User, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 export const metadata = {
   title: 'Create Next App',
@@ -7,16 +10,32 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  user
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  user: User
 }) {
   return (
     <html lang="en">
       <body>
+        <Header user={user} />
         <main className="min-h-screen bg-background flex flex-col items-center">
           {children}
         </main>
       </body>
     </html>
   )
+}
+
+export async function getServerSideProps() {
+  const supabase = createServerComponentClient({ cookies })
+
+  const {
+      data: { user },
+  } = await supabase.auth.getUser()
+  
+  console.log(user);
+  return {
+      props: user
+  }
 }
