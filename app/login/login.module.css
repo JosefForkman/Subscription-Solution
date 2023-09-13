@@ -1,0 +1,32 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.loginForm a {
+    text-decoration: underline;
+}
+
+.loginForm button {
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.divider {
+    margin-block: 1.56rem;
+}
+.btn {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 700;
+    max-width: 358px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-border-radius);
+}
+.socialMediaSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

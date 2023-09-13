@@ -1,0 +1,8 @@
+.input {
+    font-size: 1rem;
+    color: hsla(0, 0%, 0%, 0.5);
+    max-width: 326px;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: var(--radius-border-radius);
+}
