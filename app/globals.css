@@ -10,8 +10,6 @@
     --colors-facebook: #1877f2;
     --colors-accent: #0043ca;
     --colors-black: #000000;
-
-    --colors-light-gray: #646464;
     --colors-gray: #444;
 }
 
@@ -28,6 +26,11 @@ body {
     font-weight: 700;
     line-height: 2.125rem;
 }
+.h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+}
 .h3 {
     font-size: 1.125rem;
     font-weight: 700;
@@ -40,6 +43,17 @@ body {
 a {
     color: inherit;
 }
+
+.btn {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 700;
+    max-width: 358px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-border-radius);
+}
 .text-center {
     text-align: center;
 }
@@ -50,11 +64,11 @@ a {
 .text-black {
     color: var(--colors-black);
 }
-.text-light-gray {
-    color: var(--colors-light-gray);
-}
 .text-gray {
     color: var(--colors-gray);
+}
+.text-accent {
+    color: var(--colors-accent);
 }
 .bg-white {
     background-color: var(--colors-white);

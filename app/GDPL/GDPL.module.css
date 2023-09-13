@@ -1,0 +1,24 @@
+.GDPLContiner {
+    display: flex;
+    flex-direction: column;
+    gap: 15.81rem;
+    margin-top: 6.3rem;
+}
+.GDPLContiner a {
+    justify-content: center;
+    text-decoration: none;
+}
+.GDPLSection {
+    padding: 0.5rem 0 1rem 0;
+    border-radius: var(--radius-border-radius);
+}
+.GDPLSection p:first-of-type {
+    margin-block: 6rem 2.5rem;
+}
+.GDPLSection a {
+    text-decoration: underline;
+}
+.svg {
+    margin: 0.61rem 0.69rem;
+}
+
