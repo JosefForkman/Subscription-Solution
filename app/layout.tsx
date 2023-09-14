@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header user={user} />
+        {/* <Header user={user} /> */}
         <main>
           {children}
         </main>
