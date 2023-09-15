@@ -36,6 +36,9 @@ const examples = [
 ]
 export default async function Index() {
   return (
-    <h1>Home page</h1>
+    <>
+      <h1>Home page</h1>
+      <p>Test Varcel</p>
+    </>
   )
 }
