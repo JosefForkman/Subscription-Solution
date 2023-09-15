@@ -40,6 +40,10 @@ body {
     line-height: 1.25rem;
 }
 
+.font-weight-bold {
+    font-weight: 700;
+}
+
 a {
     color: inherit;
 }
