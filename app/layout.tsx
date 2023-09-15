@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import './globals.css'
-import { User, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
 import { Inter } from 'next/font/google'
@@ -19,16 +19,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const supabase = createServerComponentClient({ cookies })
 
-  const {
-      data: { user },
-  } = await supabase.auth.getUser()
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Header user={user} /> */}
+        <Header />
         <main>
           {children}
         </main>

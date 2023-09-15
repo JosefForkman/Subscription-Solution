@@ -21,7 +21,8 @@ export default function () {
       //     prompt: 'consent',
       //   },
       // },
-    })
+      })
+    console.log(data);
   }
   async function signInWithFacbook() {
     const { data, error } = await supabase.auth.signInWithOAuth({

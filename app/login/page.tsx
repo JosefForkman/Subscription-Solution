@@ -30,7 +30,7 @@ export default function Login() {
         </p>
 
         {/* Message component not sure if we should use it */}
-        {/* <Messages /> */}
+        <Messages />
         <button className={"btn bg-accent text-white text-center h1"}>Logga in</button>
       </form >
 
