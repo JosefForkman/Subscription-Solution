@@ -1,42 +1,100 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 200 20% 98%;
-    --btn-background: 200 10% 91%;
-    --btn-background-hover: 200 10% 89%;
-    --foreground: 200 50% 3%;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 200 50% 3%;
-      --btn-background: 200 10% 9%;
-      --btn-background-hover: 200 10% 12%;
-      --foreground: 200 20% 96%;
-    }
-  }
+* {
+    padding: 0px;
+    margin: 0px;
+}
+/* Variables from figma */
+:root {
+    --radius-border-radius: 0.5rem;
+    --colors-off-white: #f4f3ef;
+    --colors-white: #fefefe;
+    --colors-facebook: #1877f2;
+    --colors-accent: #0043ca;
+    --colors-black: #000000;
+    --colors-gray: #444;
 }
 
-@layer base {
-  * {
-    @apply border-foreground/20;
-  }
+/* Base style */
+main {
+    padding: 1.5rem 1rem 2.5rem 1rem;
 }
 
+body {
+    background: var(--colors-off-white, #f4f3ef);
+}
+.h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 2.125rem;
+}
+.h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+}
+.h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.375rem;
+}
+.h4 {
+    line-height: 1.25rem;
+}
+
+a {
+    color: inherit;
+}
+
+.btn {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 700;
+    max-width: 358px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-border-radius);
+}
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: var(--colors-white);
+}
+.text-black {
+    color: var(--colors-black);
+}
+.text-gray {
+    color: var(--colors-gray);
+}
+.text-accent {
+    color: var(--colors-accent);
+}
+.bg-white {
+    background-color: var(--colors-white);
+}
+.bg-black {
+    background-color: var(--colors-black);
+}
+.bg-facebook {
+    background-color: var(--colors-facebook);
+}
+.bg-accent {
+    background-color: var(--colors-accent);
+}
+
+/* styles from Supabase */
 .animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
+    animation: animateIn 0.3s ease 0.15s both;
 }
 
 @keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

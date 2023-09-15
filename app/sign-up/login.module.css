@@ -1,0 +1,18 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.loginForm a {
+    text-decoration: underline;
+}
+
+.loginForm button {
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.divider {
+    margin-block: 1.56rem;
+}
+

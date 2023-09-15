@@ -1,4 +1,12 @@
+import Header from '@/components/Header'
+import { User, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 import './globals.css'
+
+import { Inter } from 'next/font/google'
+
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -7,16 +15,31 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  user
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  user: User
 }) {
+
+  console.log({ user });
+
+
+
   return (
     <html lang="en">
-      <body>
-        <main className="min-h-screen bg-background flex flex-col items-center">
+      <body className={inter.className}>
+        <Header user={user} />
+        <main>
           {children}
         </main>
       </body>
     </html>
   )
+}
+
+export async function getServerSideProps() {
+  const superbase = createServerComponentClient({ cookies });
+  const { data: { user } } = await superbase.auth.getUser();
+
+  return { props: { user } }
 }

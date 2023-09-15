@@ -10,35 +10,35 @@ import food from "../assets/mat-tallrik-halsosam-sked.jpg"
 export const dynamic = 'force-dynamic'
 
 export default function Login() {
-  
-  
+
+
   return (
     <>
-    {/* <Image src={food} alt="middags talrik med en c-osann" /> */}
+      {/* <Image src={food} alt="middags talrik med en c-osann" /> */}
       <form
         className={styles.loginForm}
-        action="/auth/sign-in"
+        action="/auth/sign-up"
         method="post"
       >
         <InputText placeholder='användarnamn' />
         <InputPassword placeholder='lösenord' />
 
         <p className="h4 text-gray text-center">
-          Har du glömt ditt lösenord?
+          När du skapar ett konto godkänner du våra
           <br />
-          <Link href='/'>Återställ det här.</Link>
+          <Link href='/GDPL'>användarvillkor.</Link>
         </p>
 
         {/* Message component not sure if we should use it */}
-        <Messages />
-        <button className={"btn bg-accent text-white text-center h1"}>Logga in</button>
+        {/* <Messages /> */}
+        <button className={"btn bg-accent text-white text-center h1"}>Skapa konto</button>
       </form >
 
       <p className={"text-center text-black" + " " + styles.divider}>eller</p>
 
       <SocialMediaSection />
-      
-      <p className="h4 text-center text-gray">Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link></p>
+
+      <p className="h4 text-center text-gray">Har du redan ett konto? <Link href="/login">Logga in här</Link></p>
 
     </>
   )
