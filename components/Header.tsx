@@ -1,10 +1,13 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { User } from "@supabase/auth-helpers-nextjs";
+import { User} from '@supabase/auth-helpers-nextjs'
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
-export default function Header({ user }: { user: User | null }) {
+export default async function Header({user}: {user: User}) {
+
+
+
     return (
         <header className="py-2 border-b border-b-foreground/10">
             <nav className="w-full flex justify-center">
@@ -30,3 +33,4 @@ export default function Header({ user }: { user: User | null }) {
         </header>
     )
 }
+
