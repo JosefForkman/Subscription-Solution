@@ -8,10 +8,21 @@
 
 .prenumeration ul li {
     list-style: none;
+    max-width: 326px;
+    height: 57px;
     padding: 0.75rem;
     border-radius: var(--radius-border-radius);
+    overflow-y: hidden;
+
+    transition: height 320ms;
 }
-.prenumeration ul li div:first-child {
+
+.prenumeration ul li hr {
+    border-top: 1px solid var(--colors-black);
+    margin-block: 0.81rem;
+}
+
+.prenumeration ul li > div:first-child {
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: .25rem 0.5rem;
@@ -19,8 +30,37 @@
     list-style: none;
 }
 
-.detailSection {
-    border-top: 1px solid var(--colors-black);
+.prenumeration ul li > div:first-child img {
+    grid-row: span 2;
+}
+
+.prenumeration ul li .name {
+    grid-column: 2;
+    grid-row: 2;
+}
+.prenumeration ul li .type {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.prenumeration ul li .priceChange {
+    display: none;    
+    
+    /* display: flex; */
+    gap: 0.19rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.prenumeration ul li .prise {
+    grid-row: 2;
+    grid-column: 3;
+}
+
+.detailSection .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .detailSection .actionBtn {
@@ -30,4 +70,14 @@
 .detailSection .spaceBetween {
     display: flex;
     justify-content: space-between;
+}
+
+
+/* Active state */
+.prenumeration ul .active {
+    height: 191px;
+    transition: height 320ms;
+}
+.prenumeration ul .active .priceChange {
+    display: flex;
 }

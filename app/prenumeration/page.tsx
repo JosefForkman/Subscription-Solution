@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useState } from "react";
 import {  prenumerationer } from "../../lib/Prenumerationer";
 import List from "@/components/prenumeration/list";
