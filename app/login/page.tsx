@@ -20,8 +20,8 @@ export default function Login() {
         action="/auth/sign-in"
         method="post"
       >
-        <InputText placeholder='användarnamn' />
-        <InputPassword placeholder='lösenord' />
+        <InputText placeholder='användarnamn' name="email" />
+        <InputPassword placeholder='lösenord' name="password" />
 
         <p className="h4 text-gray text-center">
           Har du glömt ditt lösenord?

@@ -1,6 +1,12 @@
 import styles from "./input.module.css";
-export default function InputText({placeholder}: {placeholder:string}) {
-    return (
-      <input className={styles.input} type="text" placeholder={placeholder} />
-    )
-  }
+
+type props = {
+  placeholder: string,
+  name: string
+}
+
+export default function InputText({ placeholder, name }: props) {
+  return (
+    <input className={styles.input} type="text" name={name} placeholder={placeholder} />
+  )
+}

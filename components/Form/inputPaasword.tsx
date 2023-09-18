@@ -1,6 +1,12 @@
 import styles from "./input.module.css";
-export default function InputPassword({placeholder}: {placeholder:string}) {
+
+type props = { 
+  placeholder: string,
+  name: string
+}
+
+export default function InputPassword({placeholder, name}: props) {
     return (
-      <input className={styles.input} type="password" placeholder={placeholder} />
+      <input className={styles.input} type="password" name={name} placeholder={placeholder} />
     )
   }
