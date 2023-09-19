@@ -44,12 +44,12 @@
 }
 
 .prenumeration ul li .priceChange {
-    display: none;    
-    
-    /* display: flex; */
+    display: flex;
     gap: 0.19rem;
     align-items: center;
     justify-content: flex-end;
+    transition: opacity 800ms;
+    opacity: 0;
 }
 
 .prenumeration ul li .prise {
@@ -79,5 +79,6 @@
     transition: height 320ms;
 }
 .prenumeration ul .active .priceChange {
-    display: flex;
+    opacity: 1;
+    transition: opacity 800ms;
 }

@@ -1,0 +1,20 @@
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.tabs .tab {
+    list-style: none;
+    scroll-snap-align: center;
+}
+
+.tabs button {
+    min-width: 5.8125rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-border-radius);
+    border: none;
+}
+
