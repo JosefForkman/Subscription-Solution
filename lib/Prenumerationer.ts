@@ -5,6 +5,7 @@ export type PrenumerationType = {
     pris: number;
     bindningstid: Date;
     Uppsägningstid: string;
+    uppsägningsUrl?: string;
     historia: {
         pris: number;
         datum: Date
@@ -19,6 +20,7 @@ export const prenumerationer: PrenumerationType[] = [
         pris: 129,
         bindningstid: new Date("2023-11-24"),
         Uppsägningstid: "2 månader",
+        uppsägningsUrl: "",
         historia: [
             {
                 pris: 129,
@@ -37,6 +39,7 @@ export const prenumerationer: PrenumerationType[] = [
         pris: 129,
         bindningstid: new Date("2023-11-24"),
         Uppsägningstid: "2 månader",
+        uppsägningsUrl: "",
         historia: [],
     },
     {
@@ -46,6 +49,7 @@ export const prenumerationer: PrenumerationType[] = [
         pris: 129,
         bindningstid: new Date("2023-11-24"),
         Uppsägningstid: "2 månader",
+        uppsägningsUrl: "",
         historia: [],
     },
     {
@@ -55,6 +59,7 @@ export const prenumerationer: PrenumerationType[] = [
         pris: 129,
         bindningstid: new Date("2023-11-24"),
         Uppsägningstid: "2 månader",
+        uppsägningsUrl: "",
         historia: [],
     },
     {
@@ -64,6 +69,7 @@ export const prenumerationer: PrenumerationType[] = [
         pris: 129,
         bindningstid: new Date("2023-11-24"),
         Uppsägningstid: "2 månader",
+        uppsägningsUrl: "",
         historia: [],
     },
 ];
