@@ -7,14 +7,18 @@ import { useState } from "react";
 
 export default function Item({ PrenumerationItem }: { PrenumerationItem: PrenumerationType }) {
     /* Date formaler */
-    const date = `${PrenumerationItem.bindningstid.getDay()}/${PrenumerationItem.bindningstid.getMonth()}/${PrenumerationItem.bindningstid.getFullYear()}`
+    // const date = `${PrenumerationItem.bindningstid.getDay()}/${PrenumerationItem.bindningstid.getMonth()}/${PrenumerationItem.bindningstid.getFullYear()}`
 
     const [isOpen, setOpen] = useState(false);
 
     return (
         <li className={isOpen ? `${styles["active"]} bg-white` : "bg-white"}>
             <div onClick={() => setOpen(!isOpen)}>
-                <Image src={`/${PrenumerationItem.bild}`} width={56} height={56} alt={PrenumerationItem.bild} />
+                { PrenumerationItem.bild ?
+                    <Image src={`/${PrenumerationItem.bild}`} width={56} height={56} alt={PrenumerationItem.bild} />
+                    : 
+                    <div className={`${styles.missingImage} bg-accent`}></div>
+                }
                 <h2 className={`h2 font-weight-bold ${styles.name}`}>{PrenumerationItem.namn}</h2>
                 <p className={styles.type}>{PrenumerationItem.type}</p>
                 <p className={`h2 font-weight-bold ${styles.prise}`}>{PrenumerationItem.pris}kr</p>
@@ -33,7 +37,7 @@ export default function Item({ PrenumerationItem }: { PrenumerationItem: Prenume
                 <div className={styles.body}>
                     <div className={styles.spaceBetween}>
                         <p>Bindningstid:</p>
-                        <p>{PrenumerationItem.bindningstid.toLocaleDateString()}</p>
+                        <p>{PrenumerationItem.bindningstid}</p>
                     </div>
                     <div className={styles.spaceBetween}>
                         <p>Uppsägningstid:</p>

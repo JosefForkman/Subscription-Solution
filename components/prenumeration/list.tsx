@@ -30,6 +30,9 @@ export default function List({ prenumerationList }: { prenumerationList: Prenume
     })
     
     prenumerationList = prenumerationList.sort((a, b) => {
+        if (!a.namn || !b.namn) {
+            return 0
+        }
         const nameA = a.namn.toLowerCase();
         const nameB = b.namn.toLowerCase();
 

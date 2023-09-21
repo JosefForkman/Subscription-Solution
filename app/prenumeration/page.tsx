@@ -4,7 +4,6 @@ import { prenumerationer } from "../../lib/Prenumerationer";
 import List from "@/components/prenumeration/list";
 import styles from "./prenumeration.module.css";
 import FilterTabs from "@/components/filterTabs/filterTabs";
-import { createContext } from "vm";
 import { FilterContextProvider } from "@/lib/Context/filter";
 
 
@@ -12,7 +11,13 @@ export const dynamic = 'force-dynamic'
 
 export default async function prenumeration() {
 
-    const totalPrice = prenumerationer.reduce((prevues, current) => prevues + current.pris, 0)
+    const totalPrice = prenumerationer.reduce((prevues, current) => {
+        if (!current.pris) {
+            return 0
+        }
+        
+        return prevues + current.pris
+    }, 0)
 
     return (
         <FilterContextProvider>
