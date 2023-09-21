@@ -1,5 +1,7 @@
+import { filterType } from "./Context/filter";
+
 export type PrenumerationType = {
-    type: "Nyheter" | "Streaming" | "Musik" | "Skola";
+    type: filterType;
     namn: string;
     bild: string;
     pris: number;
@@ -63,7 +65,7 @@ export const prenumerationer: PrenumerationType[] = [
         historia: [],
     },
     {
-        type: "Musik",
+        type: "Böcker",
         namn: "Storytel",
         bild: "STORYTEL.png",
         pris: 129,

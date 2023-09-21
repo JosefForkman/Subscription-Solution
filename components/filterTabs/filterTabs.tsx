@@ -1,16 +1,15 @@
-"use client"
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useContext, useEffect } from "react";
 import styles from "./filterTabs.module.css";
-
-type tabsType = {
-    name: string;
-    active: boolean
-}
+import { FilterContext, tabsType } from "@/lib/Context/filter";
 
 const tabsArray: tabsType[] = [
     {
         active: false,
         name: "Musik"
+    },
+    {
+        active: false,
+        name: "Skola"
     },
     {
         active: false,
@@ -31,30 +30,46 @@ const tabsArray: tabsType[] = [
 ]
 
 export default function FilterTabs() {
-    const [tab, setTabs] = useState<tabsType[]>(tabsArray);
+    const {filter, setFilter} = useContext(FilterContext);
 
+    useEffect(() => setFilter(tabsArray), []);
+    
     const select = (e: MouseEvent<HTMLLIElement>) => {
         const { name } = e.target.parentElement.dataset
 
-        const clickTab = tab.find(tab => tab.name == name);
+        const clickTab = filter.find(tab => tab.name == name);
 
         if (clickTab) {
-            const tabIndex = tab.findIndex(tab => tab.name == clickTab.name)
-            
-            tab[tabIndex].active = !clickTab?.active
+            const tabIndex = filter.findIndex(tab => tab.name == clickTab.name)
 
-            setTabs([...tab])
+            filter[tabIndex].active = !clickTab?.active
+
+            setFilter([...filter])
         }
     }
 
-    tab.sort((a, b) => {
+    /* Make all active in first in list */
+    filter.sort(a => {
         return a.active ? -1 : 1
+    })
+
+    /* Sort all active tabs */
+    filter.sort((a, b) => {
+        if (a.active) {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+
+            /* Sort the list A-Z */
+            return nameA < nameB ? -1 : 1
+        }
+
+        return 0
     })
 
     return (
         <ul className={styles.tabs}>
             {
-                tab.map((tab, index) => {
+                filter.map((tab, index) => {
                     return (
                         <li
                             className={styles.tab}
