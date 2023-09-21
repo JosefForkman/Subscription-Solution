@@ -13,18 +13,17 @@ export default async function Header({ user }: { user: User }) {
             <nav>
                 <ul>
                     <li>
-                        {user ? (
+                         
                             <div>
-                                Hey, {user.email}!
                                 <LogoutButton />
                             </div>
-                        ) : (
+                         
                             <Link
                                 href="/login"
                             >
                                 Login
                             </Link>
-                        )}
+                        
                     </li>
                     <li>
                         <Link href="/prenumeration">Prenumerationer</Link>
