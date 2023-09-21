@@ -1,34 +1,37 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { User} from '@supabase/auth-helpers-nextjs'
+import { User } from '@supabase/auth-helpers-nextjs'
 
 // export const dynamic = 'force-dynamic'
 
-export default async function Header({user}: {user: User}) {
+export default async function Header({ user }: { user: User }) {
 
 
 
     return (
-        <header className="py-2 border-b border-b-foreground/10">
-            <nav className="w-full flex justify-center">
-                <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
-                    <div />
-                    <div>
-                        {user ? (
-                            <div className="flex items-center gap-4">
-                                Hey, {user.email}!
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                         
+                            <div>
                                 <LogoutButton />
                             </div>
-                        ) : (
+                         
                             <Link
                                 href="/login"
-                                className="inline-block py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
                             >
                                 Login
                             </Link>
-                        )}
-                    </div>
-                </div>
+                        
+                    </li>
+                    <li>
+                        <Link href="/prenumeration">Prenumerationer</Link>
+                    </li>
+                    <li>
+                        <Link href="/">Hem</Link>
+                    </li>
+                </ul>
             </nav>
         </header>
     )
