@@ -44,13 +44,3 @@ export default function List({ prenumerationList }: { prenumerationList: Prenume
             </ul>
         </section>)
 }
-
-
-function findWithAttr(prenumerationList: PrenumerationType[], attr: string, value: string) {
-    for(var i = 0; i < prenumerationList.length; i += 1) {
-        if(prenumerationList[i]["type"] === value) {
-            return i;
-        }
-    }
-    return -1;
-}
