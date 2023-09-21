@@ -30,13 +30,25 @@ const tabsArray: tabsType[] = [
 ]
 
 export default function FilterTabs() {
-    const {filter, setFilter} = useContext(FilterContext);
+    const filterContext = useContext(FilterContext);
+    if (!filterContext) {
+        return
+    }
+    const { filter, setFilter } = filterContext;
+
     const ulRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => setFilter(tabsArray), []);
-    
-    const select = (e: MouseEvent<HTMLLIElement>) => {
-        const { name } = e.target.parentElement.dataset
+
+    const select = (event: MouseEvent<HTMLLIElement>) => {
+        // const { name } = e.target.parentElement.dataset
+        const element = event.target as HTMLButtonElement;
+
+        if (!element.parentElement) {
+            return
+        }
+
+        const { name } = element.parentElement.dataset
 
         const clickTab = filter.find(tab => tab.name == name);
 

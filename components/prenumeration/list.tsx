@@ -5,7 +5,11 @@ import { FilterContext, tabsType } from "@/lib/Context/filter";
 import { useContext } from "react";
 
 export default function List({ prenumerationList }: { prenumerationList: PrenumerationType[] }) {
-    const { filter, setFilter } = useContext(FilterContext);
+    const filterContext = useContext(FilterContext);
+    if (!filterContext) {
+        return
+    }
+    const { filter, setFilter } = filterContext;
 
     
 

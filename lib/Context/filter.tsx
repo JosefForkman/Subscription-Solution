@@ -12,7 +12,7 @@ type FilterContextType = {
     setFilter: React.Dispatch<React.SetStateAction<tabsType[]>>
 }
 
-export const FilterContext = createContext<FilterContextType>();
+export const FilterContext = createContext<FilterContextType | null>(null);
 
 export const FilterContextProvider = ({ children }: { children: React.ReactElement }) => {
     const [filter, setFilter] = useState<tabsType[]>([])
