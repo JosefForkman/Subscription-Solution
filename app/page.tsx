@@ -10,7 +10,7 @@ export default async function Index() {
     data: { session },
   } = await supabase.auth.getSession();
   if (!session) {
-    redirect('/sign-in');
+    redirect('/login');
   }
   const { data } = await supabase.from('user_service').select(`
   *, 
