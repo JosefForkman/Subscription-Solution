@@ -1,10 +1,9 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { User } from '@supabase/auth-helpers-nextjs'
 
 // export const dynamic = 'force-dynamic'
 
-export default async function Header({ user }: { user: User }) {
+export default async function Header() {
 
 
 
