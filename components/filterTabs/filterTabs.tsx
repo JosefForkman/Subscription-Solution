@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useEffect } from "react";
+import { MouseEvent, useContext, useEffect, useRef } from "react";
 import styles from "./filterTabs.module.css";
 import { FilterContext, tabsType } from "@/lib/Context/filter";
 
@@ -31,6 +31,7 @@ const tabsArray: tabsType[] = [
 
 export default function FilterTabs() {
     const {filter, setFilter} = useContext(FilterContext);
+    const ulRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => setFilter(tabsArray), []);
     
@@ -46,6 +47,8 @@ export default function FilterTabs() {
 
             setFilter([...filter])
         }
+
+        ulRef.current?.scrollTo(0, 0)
     }
 
     /* Make all active in first in list */
@@ -67,7 +70,7 @@ export default function FilterTabs() {
     })
 
     return (
-        <ul className={styles.tabs}>
+        <ul ref={ulRef} className={styles.tabs}>
             {
                 filter.map((tab, index) => {
                     return (
