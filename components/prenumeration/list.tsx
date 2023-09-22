@@ -23,7 +23,7 @@ export default function List({ prenumerationList }: { prenumerationList: Prenume
             return true
         }
 
-        let isActive = newFilter.findIndex((tab) => tab.name == array_el.type)
+        let isActive = newFilter.findIndex((tab) => tab.name.toLocaleLowerCase() == array_el.type?.toLocaleLowerCase())
 
         return isActive > -1
         

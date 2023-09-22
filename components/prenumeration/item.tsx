@@ -6,17 +6,14 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Item({ PrenumerationItem }: { PrenumerationItem: PrenumerationType }) {
-    /* Date formaler */
-    // const date = `${PrenumerationItem.bindningstid.getDay()}/${PrenumerationItem.bindningstid.getMonth()}/${PrenumerationItem.bindningstid.getFullYear()}`
-
     const [isOpen, setOpen] = useState(false);
 
     return (
         <li className={isOpen ? `${styles["active"]} bg-white` : "bg-white"}>
             <div onClick={() => setOpen(!isOpen)}>
-                { PrenumerationItem.bild ?
+                {PrenumerationItem.bild ?
                     <Image src={`/${PrenumerationItem.bild}`} width={56} height={56} alt={PrenumerationItem.bild} />
-                    : 
+                    :
                     <div className={`${styles.missingImage} bg-accent`}></div>
                 }
                 <h2 className={`h2 font-weight-bold ${styles.name}`}>{PrenumerationItem.namn}</h2>
@@ -46,9 +43,9 @@ export default function Item({ PrenumerationItem }: { PrenumerationItem: Prenume
                 </div>
 
                 <div className={styles.spaceBetween + " " + styles.actionBtn}>
-                    <button className="btn bg-accent text-white">Avsluta</button>
-                    <button className="btn bg-accent text-white">Historik</button>
-                    <button className="btn bg-accent text-white">Ändra</button>
+                    <a href={PrenumerationItem.uppsägningsUrl} target="_blank" className="btn bg-accent h4 text-white">Avsluta</a>
+                    <button className="btn bg-accent h4 text-white">Historik</button>
+                    <button className="btn bg-accent h4 text-white">Ändra</button>
                 </div>
             </div>
         </li>

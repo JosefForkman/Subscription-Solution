@@ -80,6 +80,46 @@
 }
 
 
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-block: 2.31rem 1.5rem;
+}
+.info .base {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0.75rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.info .base button {
+    background-color: transparent;
+    border: none;
+}
+
+.info .tabs {
+    display: flex;
+    gap: 0.5rem;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.info .tabs .tab {
+    list-style: none;
+    scroll-snap-align: center;
+}
+
+.info .tabs button {
+    min-width: 5.8125rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-border-radius);
+    border: none;
+}
+
 /* Active state */
 .prenumeration ul .active {
     height: 191px;
