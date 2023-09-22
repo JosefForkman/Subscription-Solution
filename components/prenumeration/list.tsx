@@ -23,13 +23,16 @@ export default function List({ prenumerationList }: { prenumerationList: Prenume
             return true
         }
 
-        let isActive = newFilter.findIndex((tab) => tab.name == array_el.type)
+        let isActive = newFilter.findIndex((tab) => tab.name.toLocaleLowerCase() == array_el.type?.toLocaleLowerCase())
 
         return isActive > -1
         
     })
     
     prenumerationList = prenumerationList.sort((a, b) => {
+        if (!a.namn || !b.namn) {
+            return 0
+        }
         const nameA = a.namn.toLowerCase();
         const nameB = b.namn.toLowerCase();
 

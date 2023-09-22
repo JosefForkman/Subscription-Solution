@@ -55,6 +55,7 @@ a {
     gap: 0.5rem;
     align-items: center;
     font-weight: 700;
+    text-decoration: none;
     max-width: 358px;
     padding: 0.5rem 1rem;
     border: none;
