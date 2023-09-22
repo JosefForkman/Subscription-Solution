@@ -12,7 +12,7 @@ export default function Item({ PrenumerationItem }: { PrenumerationItem: Prenume
         <li className={isOpen ? `${styles["active"]} bg-white` : "bg-white"}>
             <div onClick={() => setOpen(!isOpen)}>
                 {PrenumerationItem.bild ?
-                    <Image src={`/${PrenumerationItem.bild}`} width={56} height={56} alt={PrenumerationItem.bild} />
+                    <Image src={`/${PrenumerationItem.bild.toLocaleUpperCase()}`} width={56} height={56} alt={PrenumerationItem.bild} />
                     :
                     <div className={`${styles.missingImage} bg-accent`}></div>
                 }
