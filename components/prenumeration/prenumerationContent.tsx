@@ -1,11 +1,14 @@
 "use client"
 import { FilterContextProvider } from "@/lib/Context/filter";
 import styles from "./prenumeration.module.css";
-import { PrenumerationType } from "@/lib/Prenumerationer";
+import { PrenumerationType, getPrenumerationer } from "@/lib/Prenumerationer";
 import FilterTabs from "../filterTabs/filterTabs";
 import List from "./list";
 
-export default function PrenumerationContent({prenumerationer}: {prenumerationer: PrenumerationType[]}) {
+export default async function PrenumerationContent() {
+
+    const prenumerationer = await getPrenumerationer();
+
 
     const totalPrice = prenumerationer.reduce((prevues, current) => {
         if (!current.pris) {

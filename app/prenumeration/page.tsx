@@ -1,6 +1,6 @@
 "use client"
 
-import { prenumerationer } from "../../lib/Prenumerationer";
+import { getPrenumerationer } from "../../lib/Prenumerationer";
 import List from "@/components/prenumeration/list";
 import styles from "./prenumeration.module.css";
 import FilterTabs from "@/components/filterTabs/filterTabs";
@@ -10,6 +10,8 @@ import { FilterContextProvider } from "@/lib/Context/filter";
 export const dynamic = 'force-dynamic'
 
 export default async function prenumeration() {
+
+    const prenumerationer = await getPrenumerationer();
 
     const totalPrice = prenumerationer.reduce((prevues, current) => {
         if (!current.pris) {
