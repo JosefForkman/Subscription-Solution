@@ -2,6 +2,7 @@ import { createClientComponentClient, createServerComponentClient } from "@supab
 import { filterType } from "./Context/filter";
 import { Database } from "./supabase";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 export type PrenumerationType = {
     type: string | undefined;
@@ -19,15 +20,17 @@ export type PrenumerationType = {
         | undefined;
 };
 
-export const getPrenumerationer = async () => {
-    const supabase = createClientComponentClient<Database>();
+// export const revalidate = 1000
+
+export const getPrenumerationer = cache(async () => {
+    const supabase = createServerComponentClient<Database>({cookies});
 
     try {
         const { data } = await supabase
             .from("user_service")
             .select(`*, service(*, category(*), price_history(*))`);
-
-        if (!data) {
+        
+            if (!data) {
             return [];
         }
 
@@ -53,7 +56,7 @@ export const getPrenumerationer = async () => {
     } catch (error) {
         throw new Error("server error when get data from DB");
     }
-};
+}) ;
 
 // export const prenumerationer: PrenumerationType[] = [
 //     {

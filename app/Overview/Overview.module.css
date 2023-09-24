@@ -1,0 +1,61 @@
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+}
+
+.smallCardGrid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0.5rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.gridFull {
+    grid-column: 1 / -1;
+}
+
+.overviewSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    padding: 0.75rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.overviewSection ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.overviewSection ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.topRating {
+    padding: 1.19rem 0.75rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.topRating a {
+    text-decoration: none;
+}
+
+/* spara Section */
+.pig {
+    grid-column: span 2;
+    justify-self: center;
+}
+
+/* månadskostnad */
+
+.månadskostnad svg:first-of-type {
+    justify-self: center;
+    align-self: center;
+}
+
+.månadskostnad p {
+    align-self: end;
+}

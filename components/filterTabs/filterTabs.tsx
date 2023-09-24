@@ -1,3 +1,4 @@
+"use client"
 import { MouseEvent, useContext, useEffect, useRef } from "react";
 import styles from "./filterTabs.module.css";
 import { FilterContext, tabsType } from "@/lib/Context/filter";

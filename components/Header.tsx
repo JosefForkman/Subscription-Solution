@@ -1,11 +1,10 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
+import { getPrenumerationer } from "@/lib/Prenumerationer";
 
 // export const dynamic = 'force-dynamic'
 
-export default async function Header() {
-
-
+export default async function Header() {   
 
     return (
         <header>
@@ -25,10 +24,10 @@ export default async function Header() {
                         
                     </li>
                     <li>
-                        <Link href="/prenumeration">Prenumerationer</Link>
+                        <Link href="/">Hem</Link>
                     </li>
                     <li>
-                        <Link href="/">Hem</Link>
+                        <Link href="/Overview">Överblick</Link>
                     </li>
                 </ul>
             </nav>

@@ -5,10 +5,7 @@ import { PrenumerationType, getPrenumerationer } from "@/lib/Prenumerationer";
 import FilterTabs from "../filterTabs/filterTabs";
 import List from "./list";
 
-export default async function PrenumerationContent() {
-
-    const prenumerationer = await getPrenumerationer();
-
+export default async function PrenumerationContent({prenumerationer}: {prenumerationer: PrenumerationType[]}) {
 
     const totalPrice = prenumerationer.reduce((prevues, current) => {
         if (!current.pris) {
