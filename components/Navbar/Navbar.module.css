@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: var(--radius-border-radius);
+}
+.navLink {
+  list-style: none;
+  height: 2.75rem;
+  width: 2.75rem;
+  border-radius: var(--radius-border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
