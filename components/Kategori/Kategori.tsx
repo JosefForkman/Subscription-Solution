@@ -8,12 +8,16 @@ import { PrenumerationType } from "@/lib/Prenumerationer";
 export default async function Kategori({prenumerationer}: {prenumerationer: PrenumerationType[]}) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
+  let chartData: {type: string, value: number}[] = [...prenumerationer].reduce((previousValue, currentValue) => {
+      return previousValue.push({type: "Streaming", value: 1 });
+  }, [{type: "Streaming", value: 0 }])
+
   const data: ChartData<"pie", number[], string> = {
     labels: getTabs(prenumerationer).map(val => val.name),
     datasets: [
       {
-        label: '# of Votes',
-        data: [1],
+        label: 'kr',
+        data: [1, 3],
         backgroundColor: [
           "#0043CA",
           "#607EBB",
