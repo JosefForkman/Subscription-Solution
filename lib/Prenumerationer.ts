@@ -1,5 +1,4 @@
-import { createClientComponentClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { filterType } from "./Context/filter";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "./supabase";
 import { cookies } from "next/headers";
 import { cache } from "react";

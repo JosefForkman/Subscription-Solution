@@ -1,9 +1,7 @@
 import { createContext, useState } from "react";
 
-export type filterType = "Nyheter" | "Streaming" | "Musik" | "Skola" | "Böcker" | "Annat"
-
 export type tabsType = {
-    name: filterType;
+    name: string;
     active: boolean
 }
 
