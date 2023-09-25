@@ -20,6 +20,7 @@ main {
 
 body {
   background: var(--colors-off-white, #f4f3ef);
+  min-height: 100vh;
 }
 .h1 {
   font-size: 1.75rem;
@@ -106,5 +107,5 @@ a {
 }
 header {
   position: sticky;
-  top: 84%;
+  top: 90vh;
 }

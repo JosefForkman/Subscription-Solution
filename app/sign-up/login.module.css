@@ -1,18 +1,23 @@
 .loginForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .loginForm a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .loginForm button {
-    justify-content: center;
-    margin-top: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 .divider {
-    margin-block: 1.56rem;
+  margin-block: 1.56rem;
 }
-
+.logo {
+  width: 100%;
+  margin-block: auto;
+  padding-top: 2rem;
+  padding-bottom: 4.18rem;
+}

@@ -1,0 +1,22 @@
+.pill {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 4rem;
+}
+.pillContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.dots {
+  height: 0.625rem;
+  width: 0.625rem;
+  background-color: var(--colors-accent);
+  border-radius: 2rem;
+}
+.carousel {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
