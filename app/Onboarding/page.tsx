@@ -11,9 +11,9 @@ export default async function Onboarding() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  // if (session) {
-  //   redirect('/');
-  // }
+  if (session) {
+    redirect('/');
+  }
   return (
     <>
       <Carusel />
