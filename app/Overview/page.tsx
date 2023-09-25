@@ -48,7 +48,7 @@ export default async function Överblick() {
           <Link className="h3 text-accent" href={'#'}>Sveriges topp 5 prenumerationer</Link>
         </section>
 
-        <Kategori />
+        <Kategori prenumerationer={prenumerationer} />
 
         <section className={`${styles.sparaSection} ${styles.smallCardGrid} bg-white`}>
           <h2 className="h3">Skapa sparplan</h2>

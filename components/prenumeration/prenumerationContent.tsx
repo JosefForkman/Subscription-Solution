@@ -45,7 +45,8 @@ export default async function PrenumerationContent({prenumerationer}: {prenumera
                     </div>
 
                     {/* Filter tabs */}
-                    <FilterTabs />
+                    
+                    <FilterTabs prenumerationer={prenumerationer} />
                 </section>
                 <List prenumerationList={prenumerationer} />
 

@@ -2,52 +2,23 @@
 import { MouseEvent, useContext, useEffect, useRef } from "react";
 import styles from "./filterTabs.module.css";
 import { FilterContext, tabsType } from "@/lib/Context/filter";
+import { getTabs } from "@/lib/getTabs";
+import { PrenumerationType } from "@/lib/Prenumerationer";
 
-const tabsArray: tabsType[] = [
-    {
-        active: false,
-        name: "Musik"
-    },
-    {
-        active: false,
-        name: "Skola"
-    },
-    {
-        active: false,
-        name: "Nyheter"
-    },
-    {
-        active: false,
-        name: "Streaming"
-    },
-    {
-        active: false,
-        name: "Böcker"
-    },
-    {
-        active: false,
-        name: "Annat"
-    },
-]
 
-export default function FilterTabs() {
+export default function FilterTabs({ prenumerationer }: { prenumerationer: PrenumerationType[] }) {
     const filterContext = useContext(FilterContext);
-    if (!filterContext) {
-        return
-    }
+    if (!filterContext) { return }
     const { filter, setFilter } = filterContext;
 
     const ulRef = useRef<HTMLUListElement>(null);
 
-    useEffect(() => setFilter(tabsArray), []);
+    useEffect(() => setFilter(getTabs(prenumerationer)), []);
 
     const select = (event: MouseEvent<HTMLLIElement>) => {
-        // const { name } = e.target.parentElement.dataset
         const element = event.target as HTMLButtonElement;
 
-        if (!element.parentElement) {
-            return
-        }
+        if (!element.parentElement) { return }
 
         const { name } = element.parentElement.dataset
 
