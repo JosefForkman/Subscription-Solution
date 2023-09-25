@@ -9,21 +9,25 @@ import { MouseEventHandler, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
-  const [currentPath, setCurrentPath] = useState(
-    location.origin + usePathname()
-  );
+  const [currentPath, setCurrentPath] = useState(usePathname());
 
   const handleLinkClick: MouseEventHandler<HTMLAnchorElement> = (
     event: any
   ) => {
-    setCurrentPath(event.currentTarget.href);
+    if (event.currentTarget.href === location.origin + '/') {
+      setCurrentPath('/');
+    } else if (event.currentTarget.href === location.origin + '/More') {
+      setCurrentPath('/More');
+    } else if (event.currentTarget.href === location.origin + '/Overview') {
+      setCurrentPath('/Overview');
+    }
   };
   return (
     <>
       <nav className={` bg-accent ${styles.navbar} `}>
         <Link
           className={`text-white ${styles.navLink} ${
-            currentPath == `${location.origin}/Overview` ? 'bg-white' : ''
+            currentPath == `/Overview` ? 'bg-white' : ''
           }`}
           href={'/Overview'}
           onClick={handleLinkClick}
@@ -32,7 +36,7 @@ export default function Navbar() {
         </Link>
         <Link
           className={`${styles.navLink} ${
-            currentPath == `${location.origin}/` ? 'bg-white' : ''
+            currentPath == `/` ? 'bg-white' : ''
           }`}
           href={'/'}
           onClick={handleLinkClick}
@@ -41,7 +45,7 @@ export default function Navbar() {
         </Link>
         <Link
           className={`text-white ${styles.navLink} ${
-            currentPath == `${location.origin}/More` ? 'bg-white' : ''
+            currentPath == `/More` ? 'bg-white' : ''
           }`}
           href={'/More'}
           onClick={handleLinkClick}
