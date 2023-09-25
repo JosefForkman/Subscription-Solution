@@ -5,7 +5,7 @@ import Image from 'next/image';
 import homeIcon from './../../public/svg/home.svg';
 import dotsIcon from './../../public/svg/dots.svg';
 import overviewIcon from './../../public/svg/overview.svg';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
