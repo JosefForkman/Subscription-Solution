@@ -1,4 +1,5 @@
 .grid {
+    margin-top: 2.31rem;
     display: grid;
     grid-template-columns: 2fr 3fr;
     gap: 1rem;
