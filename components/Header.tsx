@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { getPrenumerationer } from "@/lib/Prenumerationer";
+import NavbarContainer from "./NavbarContainer/NavbarContainer";
 
 // export const dynamic = 'force-dynamic'
 
@@ -8,7 +9,8 @@ export default async function Header() {
 
     return (
         <header>
-            <nav>
+            <NavbarContainer />
+            {/* <nav>
                 <ul>
                     <li>
                          
@@ -30,7 +32,7 @@ export default async function Header() {
                         <Link href="/Overview">Överblick</Link>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </header>
     )
 }
