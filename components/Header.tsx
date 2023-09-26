@@ -2,7 +2,6 @@ import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import NavbarContainer from "./NavbarContainer/NavbarContainer";
 
-// export const dynamic = 'force-dynamic'
 
 export default async function Header() {
 
