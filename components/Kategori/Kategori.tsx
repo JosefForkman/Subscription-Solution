@@ -6,17 +6,17 @@ import { Pie } from "react-chartjs-2"
 import { PrenumerationType } from "@/lib/Prenumerationer";
 
 export default async function Kategori({ prenumerationer }: { prenumerationer: PrenumerationType[] }) {
-  ChartJS.register(ArcElement, Tooltip, Legend);
+  ChartJS.register(ArcElement, Tooltip, Legend,);
 
   const chartData = prenumerationer.reduce((previousValue, currentValue) => {
     const prenumerationerCoppy = [...previousValue];
     const index = prenumerationerCoppy.findIndex((value) => value.type == currentValue.type);
 
-    if (index > 0) {
-      prenumerationerCoppy[index].value += currentValue.pris ?? 0
-    }
-    if (currentValue.type) {
+    /* add new to chart */
+    if (currentValue.type && index == -1) {
       prenumerationerCoppy.push({ type: currentValue.type, value: currentValue.pris ?? 0 })
+    } else {
+      prenumerationerCoppy[index].value += currentValue.pris ?? 0
     }
 
     return prenumerationerCoppy
@@ -25,8 +25,9 @@ export default async function Kategori({ prenumerationer }: { prenumerationer: P
   /* remove first element to make chartjs happy */
   chartData.shift()
 
+
   const data: ChartData<"pie", number[], string> = {
-    labels: getTabs(prenumerationer).map(val => val.name).reverse(),
+    labels: getTabs(prenumerationer).map(val => val.name),
     datasets: [
       {
         label: 'kr',
@@ -55,7 +56,8 @@ export default async function Kategori({ prenumerationer }: { prenumerationer: P
           position: "right",
           fullSize: false
         }
-      }
+      },
+      parsing: {}
     }} />
   </section>)
 }

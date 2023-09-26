@@ -38,7 +38,7 @@ export const getPrenumerationer = cache(async () => {
                 type: user_service.service?.category?.type,
                 namn: user_service.service?.name,
                 bild: user_service.service?.img_path,
-                pris: user_service.service?.defualt_price,
+                pris: user_service.enterd_price ?? user_service.service?.defualt_price,
                 bindningstid: user_service.sign_up_date,
                 Uppsägningstid: user_service.termination_date,
                 uppsägningsUrl: user_service.service?.termination_url,

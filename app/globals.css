@@ -20,6 +20,8 @@ main {
 
 body {
     background: var(--colors-off-white, #f4f3ef);
+    max-width: 375px;
+    margin-inline: auto;
 }
 .h1 {
     font-size: 1.75rem;
