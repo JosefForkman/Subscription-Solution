@@ -109,3 +109,6 @@ header {
   position: sticky;
   top: 90vh;
 }
+.btnHidden {
+  visibility: hidden;
+}

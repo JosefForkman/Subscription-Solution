@@ -36,6 +36,7 @@ top: 28vh;
 }
 .btnContainer button {
   border: none;
+  background-color: transparent;
 }
 .rightArrow{
   rotate: 180deg;

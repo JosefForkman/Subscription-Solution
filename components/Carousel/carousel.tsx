@@ -63,10 +63,10 @@ export default function Carousel() {
             ))}
           </motion.div>
           <div className={styles.btnContainer}>
-            <button onClick={onPrevClick}>
+            <button onClick={onPrevClick} className={` ${current > 0 ? '' : 'btnHidden'}`}>
               <Image src={arrow} alt="Left button" width={30} height={30} />
             </button>
-            <button onClick={onNextClick} className={styles.rightArrow}>
+            <button onClick={onNextClick} className={`${styles.rightArrow} ${current < images.length - 1 ? '' : 'btnHidden'}`}>
               <Image src={arrow} alt="Right " width={30} height={30} />
             </button>
           </div>
