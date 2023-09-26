@@ -1,0 +1,12 @@
+.gridFull {
+    grid-column: 1 / -1;
+}
+
+.Pie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: var(--radius-border-radius);
+}

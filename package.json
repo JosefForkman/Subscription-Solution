@@ -8,9 +8,11 @@
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
+    "chart.js": "^4.4.0",
     "framer-motion": "^10.16.2",
     "next": "latest",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.3"
   },

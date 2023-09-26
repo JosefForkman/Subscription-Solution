@@ -1,0 +1,32 @@
+.grid {
+    margin-top: 2.31rem;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+}
+
+.smallCardGrid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0.5rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.gridFull {
+    grid-column: 1 / -1;
+}
+
+.topRating {
+    padding: 1.19rem 0.75rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.topRating a {
+    text-decoration: none;
+}
+
+/* spara Section */
+.pig {
+    grid-column: span 2;
+    justify-self: center;
+}
