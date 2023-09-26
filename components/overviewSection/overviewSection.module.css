@@ -1,0 +1,22 @@
+.gridFull {
+    grid-column: 1 / -1;
+}
+
+.overviewSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    padding: 0.75rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.overviewSection ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.overviewSection ul li {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,8 @@
+.månadskostnad svg:first-of-type {
+    justify-self: center;
+    align-self: center;
+}
+
+.månadskostnad p {
+    align-self: end;
+}
