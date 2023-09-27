@@ -18,7 +18,7 @@ interface dataProps {
 
 export default function AddForm({ data }: dataProps) {
   const [currentService, setCurrentService] = useState<number>(1);
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState(0);
 
   const addNewUserService = async (formData: FormData) => {
     console.log('send');
@@ -68,13 +68,15 @@ export default function AddForm({ data }: dataProps) {
             ))}
           </select>
         </div>
+
         <div className={styles.subsection}>
           <label htmlFor="price">Pris</label>
           <div className={styles.sideBySide}>
             <input
               id="price"
               type="number"
-              defaultValue={price}
+              value={price}
+              onChange={event => setPrice(Number.parseInt(event.target.value))}
               className={styles.basicSize}
             />
             <button
@@ -86,6 +88,7 @@ export default function AddForm({ data }: dataProps) {
             </button>
           </div>
         </div>
+
         <div className={styles.subsection}>
           <label htmlFor="startDate">Bindningstid</label>
           <input id="startDate" type="date" className={styles.basicSize} />
