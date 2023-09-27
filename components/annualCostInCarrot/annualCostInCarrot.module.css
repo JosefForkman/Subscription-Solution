@@ -1,0 +1,15 @@
+.smallCardGrid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0.5rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.månadskostnad svg:first-of-type {
+    justify-self: center;
+    align-self: center;
+}
+
+.månadskostnad p {
+    align-self: end;
+}

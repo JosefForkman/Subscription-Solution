@@ -1,30 +1,37 @@
-import Link from 'next/link';
-import LogoutButton from './LogoutButton';
-import NavbarContainer from './NavbarContainer/NavbarContainer';
+import Link from "next/link";
+import LogoutButton from "./LogoutButton";
+import { getPrenumerationer } from "@/lib/Prenumerationer";
+import NavbarContainer from "./NavbarContainer/NavbarContainer";
 
-// export const dynamic = 'force-dynamic'
 
-export default async function Header() {
-  return (
-    <header>
-      <NavbarContainer />
-      {/* <nav>
-        <ul>
-          <li>
-            <div>
-              <LogoutButton />
-            </div>
+export default async function Header() {   
 
-            <Link href="/login">Login</Link>
-          </li>
-          <li>
-            <Link href="/prenumeration">Prenumerationer</Link>
-          </li>
-          <li>
-            <Link href="/">Hem</Link>
-          </li>
-        </ul>
-      </nav> */}
-    </header>
-  );
+    return (
+        <header>
+            <NavbarContainer />
+            {/* <nav>
+                <ul>
+                    <li>
+                         
+                            <div>
+                                <LogoutButton />
+                            </div>
+                         
+                            <Link
+                                href="/login"
+                            >
+                                Login
+                            </Link>
+                        
+                    </li>
+                    <li>
+                        <Link href="/">Hem</Link>
+                    </li>
+                    <li>
+                        <Link href="/Overview">Överblick</Link>
+                    </li>
+                </ul>
+            </nav> */}
+        </header>
+    )
 }
