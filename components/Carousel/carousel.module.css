@@ -1,0 +1,43 @@
+.pill {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 4rem;
+}
+.pillContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.dots {
+  height: 0.625rem;
+  width: 0.625rem;
+  border-radius: 2rem;
+}
+.carousel {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+.carouselContainer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+}
+.btnContainer{
+position: absolute;
+width: 100%;
+z-index: 10;
+display: flex;
+justify-content: space-between;
+top: 28vh;
+}
+.btnContainer button {
+  border: none;
+  background-color: transparent;
+}
+.rightArrow{
+  rotate: 180deg;
+}

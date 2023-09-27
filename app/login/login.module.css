@@ -15,4 +15,9 @@
 .divider {
     margin-block: 1.56rem;
 }
-
+.logo {
+    width: 100%;
+    margin-block: auto;
+    padding-top: 2rem;
+    padding-bottom: 4.18rem;
+  }

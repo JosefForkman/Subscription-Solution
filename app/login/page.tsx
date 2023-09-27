@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Messages from './messages'
 import SocialMediaSection from "@/components/SocialMedia/SocialMediaSection";
 import Image from "next/image";
-import food from "../assets/mat-tallrik-halsosam-sked.jpg"
+import owl from './../../public/svg/owl.svg'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,7 +14,7 @@ export default function Login() {
   
   return (
     <>
-    {/* <Image src={food} alt="middags talrik med en c-osann" /> */}
+    <Image src={owl} alt="Logo" className={styles.logo}/>
       <form
         className={styles.loginForm}
         action="/auth/sign-in"
