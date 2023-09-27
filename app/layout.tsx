@@ -6,7 +6,6 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 
 
-export const dynamic = 'force-dynamic'
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
 
