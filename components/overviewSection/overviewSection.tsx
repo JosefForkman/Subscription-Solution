@@ -6,7 +6,7 @@ export default async function OverviewSection({ prenumerationer }: { prenumerati
 
     const Quantity = prenumerationer.length
     const MonthlyCost = prenumerationer.reduce((previousValue, currentValue) => previousValue += currentValue.pris ?? 0, 0)
-    const annualCost = MonthlyCost * Quantity
+    const annualCost = (MonthlyCost * 12) * Quantity
 
     return (
         <section className={`${styles.overviewSection} ${styles.gridFull} bg-white`}>
