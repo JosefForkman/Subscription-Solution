@@ -6,7 +6,7 @@ export default async function AnnualCostInCarrot({ prenumerationer }: { prenumer
     const Quantity = prenumerationer.length
     const MonthlyCost = prenumerationer.reduce((previousValue, currentValue) => previousValue += currentValue.pris ?? 0, 0)
     const carrotPrice = 29.95
-    const price = ((MonthlyCost * Quantity) / carrotPrice).toFixed(0)
+    const price = (((MonthlyCost * 12) * Quantity) / carrotPrice).toFixed(0)
 
     return (
         <section className={`${styles.månadskostnad} ${styles.smallCardGrid} bg-white`}>
