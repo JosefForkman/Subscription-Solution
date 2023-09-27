@@ -10,7 +10,6 @@ import Kategori from "@/components/Kategori/Kategori";
 import OverviewSection from "@/components/overviewSection/overviewSection";
 import AnnualCostInCarrot from "@/components/annualCostInCarrot/annualCostInCarrot";
 
-export const dynamic = 'force-dynamic';
 
 export default async function Överblick() {
   const supabase = createServerComponentClient<Database>({ cookies });

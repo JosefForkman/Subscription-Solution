@@ -7,8 +7,6 @@ import SocialMediaSection from "@/components/SocialMedia/SocialMediaSection";
 import Image from "next/image";
 import owl from './../../public/svg/owl.svg'
 
-export const dynamic = 'force-dynamic'
-
 export default function Login() {
 
 
