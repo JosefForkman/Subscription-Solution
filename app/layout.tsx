@@ -1,6 +1,4 @@
 import Header from '@/components/Header'
-import { User, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import './globals.css'
 
 import { Inter } from 'next/font/google'

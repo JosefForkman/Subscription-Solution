@@ -4,8 +4,11 @@ import styles from "./prenumeration.module.css";
 import { PrenumerationType, getPrenumerationer } from "@/lib/Prenumerationer";
 import FilterTabs from "../filterTabs/filterTabs";
 import List from "./list";
+import { useEffect } from "react";
+import runOneSignal from "@/lib/onesignal";
+import OneSignal from "react-onesignal";
 
-export default async function PrenumerationContent({prenumerationer}: {prenumerationer: PrenumerationType[]}) {
+export default function PrenumerationContent({ prenumerationer }: { prenumerationer: PrenumerationType[] }) {
 
     const totalPrice = prenumerationer.reduce((prevues, current) => {
         if (!current.pris) {
@@ -14,6 +17,13 @@ export default async function PrenumerationContent({prenumerationer}: {prenumera
 
         return prevues + current.pris
     }, 0)
+
+    useEffect(() => {
+        runOneSignal();
+
+        // OneSignal.User.addEmail('strand.vatten@outlook.com')
+        OneSignal.logout()
+    }, [])
 
     return (
         <FilterContextProvider>
@@ -45,7 +55,7 @@ export default async function PrenumerationContent({prenumerationer}: {prenumera
                     </div>
 
                     {/* Filter tabs */}
-                    
+
                     <FilterTabs prenumerationer={prenumerationer} />
                 </section>
                 <List prenumerationList={prenumerationer} />
