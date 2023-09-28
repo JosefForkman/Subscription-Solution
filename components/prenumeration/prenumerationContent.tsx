@@ -1,14 +1,40 @@
 "use client"
 import { FilterContextProvider } from "@/lib/Context/filter";
 import styles from "./prenumeration.module.css";
-import { PrenumerationType, getPrenumerationer } from "@/lib/Prenumerationer";
+import { PrenumerationType } from "@/lib/Prenumerationer";
 import FilterTabs from "../filterTabs/filterTabs";
 import List from "./list";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import runOneSignal from "@/lib/onesignal";
+import { User } from "@supabase/supabase-js";
+import { OneSignalContext } from "@/lib/Context/oneSignal";
 import OneSignal from "react-onesignal";
 
-export default function PrenumerationContent({ prenumerationer }: { prenumerationer: PrenumerationType[] }) {
+export default function PrenumerationContent({ prenumerationer, user }: { prenumerationer: PrenumerationType[], user: User | null }) {
+
+    const contest = useContext(OneSignalContext);
+    if (!contest) {
+        return
+    }
+
+    const { oneSignalInitialized, setOneSignalInitialized } = contest;
+
+    const initializeOneSignal = async (uid: string) => {
+        if (oneSignalInitialized) {
+            return
+        }
+        setOneSignalInitialized(true)
+        await OneSignal.init({
+            appId: process.env.NEXT_PUBLIC_ONESIGNSL_KEY!,
+            notifyButton: {
+                enable: true,
+            },
+
+            allowLocalhostAsSecureOrigin: true,
+        })
+
+        OneSignal.login(uid)
+    }
 
     const totalPrice = prenumerationer.reduce((prevues, current) => {
         if (!current.pris) {
@@ -19,10 +45,9 @@ export default function PrenumerationContent({ prenumerationer }: { prenumeratio
     }, 0)
 
     useEffect(() => {
-        runOneSignal();
-
-        // OneSignal.User.addEmail('strand.vatten@outlook.com')
-        OneSignal.logout()
+        if (user) {
+            initializeOneSignal(user.id);
+        }
     }, [])
 
     return (

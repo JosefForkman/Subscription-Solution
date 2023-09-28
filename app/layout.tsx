@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import './globals.css'
 
 import { Inter } from 'next/font/google'
+import { OneSignalContextProvider } from '@/lib/Context/oneSignal'
 
 
 // If loading a variable font, you don't need to specify the font weight
@@ -19,11 +20,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 
   return (
-    <html lang="en">
+    <html lang="se">
       <body className={inter.className}>
         <Header />
         <main>
-          {children}
+          <OneSignalContextProvider>
+            {children}
+          </OneSignalContextProvider>
         </main>
       </body>
     </html>
