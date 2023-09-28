@@ -6,9 +6,19 @@ import Messages from './messages'
 import SocialMediaSection from "@/components/SocialMedia/SocialMediaSection";
 import Image from "next/image";
 import owl from './../../public/svg/owl.svg'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Login() {
+export default async function Login() {
+  const supabase = createServerComponentClient({ cookies });
 
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session) {
+    redirect('/');
+  }
 
   return (
     <>

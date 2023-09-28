@@ -34,33 +34,34 @@ export default async function addService() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    if (user !== null) {
+      if (formEndDate !== null && formEndDateMultiplier !== null) {
+        const endDate = parseInt(formEndDate);
+        const endDateMultiplier = parseInt(formEndDateMultiplier);
+        const currentDate = new Date();
+        if (endDateMultiplier == 30) {
+          const newEndDate = currentDate.setMonth(
+            currentDate.getMonth() + endDate
+          );
+          termination_date = new Date(newEndDate).toISOString();
+        }
+        if (endDateMultiplier < 30) {
+          const currentDay = currentDate.getDate();
+          const midDate = new Date(currentDate);
+          const newEndDate = midDate.setDate(currentDay + endDate);
+          termination_date = new Date(newEndDate).toISOString();
+        }
+      }
 
-    if (formEndDate !== null && formEndDateMultiplier !== null) {
-      const endDate = parseInt(formEndDate);
-      const endDateMultiplier = parseInt(formEndDateMultiplier);
-      const currentDate = new Date();
-      if (endDateMultiplier == 30) {
-        const newEndDate = currentDate.setMonth(
-          currentDate.getMonth() + endDate
-        );
-        termination_date = new Date(newEndDate).toISOString();
-      }
-      if (endDateMultiplier < 30) {
-        const currentDay = currentDate.getDate();
-        const midDate = new Date(currentDate);
-        const newEndDate = midDate.setDate(currentDay + endDate);
-        termination_date = new Date(newEndDate).toISOString();
-      }
+      const { error } = await supabase.from('user_service').insert({
+        enterd_price: parseInt(enterd_price),
+        service_id: parseInt(service_id),
+        sign_up_date: sign_up_date,
+        termination_date: termination_date,
+        user_id: user.id,
+      });
+      redirect('/');
     }
-
-    const { error } = await supabase.from('user_service').insert({
-      enterd_price: parseInt(enterd_price),
-      service_id: parseInt(service_id),
-      sign_up_date: sign_up_date,
-      termination_date: termination_date,
-      user_id: user.id,
-    });
-    redirect('/');
   };
 
   return (

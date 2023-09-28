@@ -19,7 +19,7 @@ export default async function Överblick() {
 
   /* Redirect if not login */
   if (!session) {
-    redirect('/login');
+    redirect('/Onboarding');
   }
 
   /* Get the cache data */
