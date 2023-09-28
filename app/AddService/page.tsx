@@ -69,7 +69,7 @@ export default async function addService() {
       <form className={styles.addForm} action={addService}>
         <AddForm data={data} />
         <FormSubmitButton />
-        <Link href={'/'} className={`${styles.addButton} bg-white`}>
+        <Link href={'/'} className={`${styles.backButton} bg-white`}>
           Avbryt
         </Link>
       </form>

@@ -36,7 +36,7 @@ export default function Navbar() {
         </Link>
         <Link
           className={`${styles.navLink} ${
-            currentPath == `/` ? 'bg-white' : ''
+            currentPath == `/` || currentPath == '' ? 'bg-white' : ''
           }`}
           href={'/'}
           onClick={handleLinkClick}
