@@ -18,11 +18,11 @@ export default async function OverviewSection({ prenumerationer }: { prenumerati
                 </li>
                 <li>
                     <h3 className="h3">Total Månadskotnad</h3>
-                    <p className="h2">{formatCost.format(MonthlyCost)}</p>
+                    <p className="h2">{MonthlyCost}kr</p>
                 </li>
                 <li>
                     <h3 className="h3">Total årskostnad</h3>
-                    <p className="h2">{formatCost.format(annualCost)}</p>
+                    <p className="h2">{annualCost}kr</p>
                 </li>
             </ul>
         </section>

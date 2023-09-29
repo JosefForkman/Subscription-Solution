@@ -14,6 +14,15 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 export const dynamic = 'force-dynamic'
 
 export default function Login() {
+    
+    const supabase = createServerComponentClient({ cookies });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session) {
+    redirect('/');
+  }
 
   const supabase = createClientComponentClient()
 
@@ -29,9 +38,11 @@ export default function Login() {
     }
   }, [])
 
+
   return (
     <>
       <Image src={owl} alt="Logo" className={styles.logo} />
+
       <form
         className={styles.loginForm}
         action="/auth/sign-in"
@@ -43,20 +54,25 @@ export default function Login() {
         <p className="h4 text-gray text-center">
           Har du glömt ditt lösenord?
           <br />
-          <Link href='/'>Återställ det här.</Link>
+          <Link href="/">Återställ det här.</Link>
         </p>
 
         {/* Message component not sure if we should use it */}
         <Messages />
-        <button className={"btn bg-accent text-white text-center h1"}>Logga in</button>
-      </form >
+        <button className={'btn bg-accent text-white text-center h1'}>
+          Logga in
+        </button>
+      </form>
 
-      <p className={"text-center text-black" + " " + styles.divider}>eller</p>
+      <p className={'text-center text-black' + ' ' + styles.divider}>eller</p>
 
       <SocialMediaSection />
-
+      
       <p className="h4 text-center text-gray">Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link></p>
 
+      <p className="h4 text-center text-gray">
+        Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link>
+      </p>
     </>
-  )
+  );
 }

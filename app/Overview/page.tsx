@@ -10,7 +10,6 @@ import Kategori from "@/components/Kategori/Kategori";
 import OverviewSection from "@/components/overviewSection/overviewSection";
 import AnnualCostInCarrot from "@/components/annualCostInCarrot/annualCostInCarrot";
 
-export const dynamic = 'force-dynamic';
 
 export default async function Överblick() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -20,7 +19,7 @@ export default async function Överblick() {
 
   /* Redirect if not login */
   if (!session) {
-    redirect('/login');
+    redirect('/Onboarding');
   }
 
   /* Get the cache data */

@@ -19,9 +19,11 @@ main {
 }
 
 body {
-    background: var(--colors-off-white, #f4f3ef);
-    max-width: 375px;
-    margin-inline: auto;
+  background: var(--colors-off-white, #f4f3ef);
+  max-width: 375px;
+  margin-inline: auto;
+  min-height: 100vh;
+  margin-bottom: 8vh;
 }
 .h1 {
   font-size: 1.75rem;

@@ -38,7 +38,7 @@ export default async function More() {
     data: { session },
   } = await supabase.auth.getSession();
   if (!session) {
-    redirect('/login');
+    redirect('/Onboarding');
   }
   return (
     <>

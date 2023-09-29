@@ -6,11 +6,19 @@ import Messages from './messages'
 import SocialMediaSection from "@/components/SocialMedia/SocialMediaSection";
 import Image from "next/image";
 import owl from './../../public/svg/owl.svg'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export const dynamic = 'force-dynamic'
+export default async function Login() {
+  const supabase = createServerComponentClient({ cookies });
 
-export default function Login() {
-
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session) {
+    redirect('/');
+  }
 
   return (
     <>
