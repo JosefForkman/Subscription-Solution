@@ -17,19 +17,20 @@ export type PrenumerationType = {
               datum: string;
           }[]
         | undefined;
+    user_service_id: number;
 };
 
 // export const revalidate = 1000
 
 export const getPrenumerationer = cache(async () => {
-    const supabase = createServerComponentClient<Database>({cookies});
+    const supabase = createServerComponentClient<Database>({ cookies });
 
     try {
         const { data } = await supabase
             .from("user_service")
             .select(`*, service(*, category(*), price_history(*))`);
-        
-            if (!data) {
+
+        if (!data) {
             return [];
         }
 
@@ -38,7 +39,9 @@ export const getPrenumerationer = cache(async () => {
                 type: user_service.service?.category?.type,
                 namn: user_service.service?.name,
                 bild: user_service.service?.img_path,
-                pris: user_service.enterd_price ?? user_service.service?.defualt_price,
+                pris:
+                    user_service.enterd_price ??
+                    user_service.service?.defualt_price,
                 bindningstid: user_service.sign_up_date,
                 Uppsägningstid: user_service.termination_date,
                 uppsägningsUrl: user_service.service?.termination_url,
@@ -48,6 +51,7 @@ export const getPrenumerationer = cache(async () => {
                         datum: history.date,
                     };
                 }),
+                user_service_id: user_service.user_service_id,
             };
         });
 
@@ -55,66 +59,4 @@ export const getPrenumerationer = cache(async () => {
     } catch (error) {
         throw new Error("server error when get data from DB");
     }
-}) ;
-
-// export const prenumerationer: PrenumerationType[] = [
-//     {
-//         type: "Streaming",
-//         namn: "NETFLIX",
-//         bild: null,
-//         pris: 129,
-//         bindningstid: "2023-11-24",
-//         Uppsägningstid: "2 månader",
-//         uppsägningsUrl: "",
-//         historia: [
-//             {
-//                 pris: 129,
-//                 datum: "2023-10-24"
-//             },
-//             {
-//                 pris: 95,
-//                 datum: "2019-01-1"
-//             }
-//         ],
-//     },
-//     {
-//         type: "Skola",
-//         namn: "ADOBE",
-//         bild: "ADOBE.png",
-//         pris: 129,
-//         bindningstid: "2023-11-24",
-//         Uppsägningstid: "2 månader",
-//         uppsägningsUrl: "",
-//         historia: [],
-//     },
-//     {
-//         type: "Nyheter",
-//         namn: "Aftonbladet",
-//         bild: "AFTONBLADET.png",
-//         pris: 129,
-//         bindningstid: "2023-11-24",
-//         Uppsägningstid: "2 månader",
-//         uppsägningsUrl: "",
-//         historia: [],
-//     },
-//     {
-//         type: "Streaming",
-//         namn: "Disney+",
-//         bild: "DISNEY+.png",
-//         pris: 129,
-//         bindningstid: "2023-11-24",
-//         Uppsägningstid: "2 månader",
-//         uppsägningsUrl: "",
-//         historia: [],
-//     },
-//     {
-//         type: "Böcker",
-//         namn: "Storytel",
-//         bild: "STORYTEL.png",
-//         pris: 129,
-//         bindningstid: "2023-11-24",
-//         Uppsägningstid: "2 månader",
-//         uppsägningsUrl: "",
-//         historia: [],
-//     },
-// ];
+});
