@@ -20,16 +20,11 @@ const onesignal = new OneSignal.DefaultApi(configuration);
 serve(async (req) => {
     const supabase = createClient<Database>(_supabaseUrl_, _supabaseKey_);
     try {
-        /* price_history row changed */
+        /* user_service row changed */
         const {
-            record: { serevice_id },
+            record: { service_id, user_id, termination_date },
         } = await req.json();
 
-        /* user_service */
-        const { data: user_id } = await supabase
-            .from("user_service")
-            .select("user_id,")
-            .eq("service_id", serevice_id);
 
         if (!user_id) {
             return new Response("Server error.", {
@@ -37,26 +32,36 @@ serve(async (req) => {
                 status: 400,
             });
         }
-
-        // Build OneSignal notification object
-        user_id.forEach(async (user_id) => {
+        
+        if (new Date().toDateString() == new Date(termination_date).toDateString()) {
+            /* service*/
+            const { data: name } = await supabase
+                .from("service")
+                .select("name")
+                .eq('service_id', service_id)
+                .single();
+    
+    
+            // Build OneSignal notification object
             const notification = new OneSignal.Notification();
             notification.app_id = _OnesignalAppId_;
             notification.include_external_user_ids = [user_id];
             notification.contents = {
-                en: `You just spent $${record.enterd_price}!`,
+                en: `${name?.name} har gått ut i dag`,
             };
             const onesignalApiRes = await onesignal.createNotification(
                 notification
             );
-        });
+            return new Response(
+                JSON.stringify({ onesignalResponse: onesignalApiRes }),
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+        }
+        
+        return new Response("Server error.");
 
-        return new Response(
-            JSON.stringify({ onesignalResponse: onesignalApiRes }),
-            {
-                headers: { "Content-Type": "application/json" },
-            }
-        );
     } catch (err) {
         console.error("Failed to create OneSignal notification", err);
         return new Response("Server error.", {
