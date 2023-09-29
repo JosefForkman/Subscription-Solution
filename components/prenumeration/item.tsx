@@ -65,7 +65,7 @@ export default function Item({
 
         <div className={styles.spaceBetween + ' ' + styles.actionBtn}>
           <a
-            href={`/RemoveServicePage?url=${PrenumerationItem.uppsägningsUrl}`}
+            href={`${PrenumerationItem.uppsägningsUrl}`}
             target="_blank"
             className="btn bg-accent h4 text-white"
           >
