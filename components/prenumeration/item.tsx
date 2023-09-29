@@ -1,24 +1,9 @@
 'use client';
 
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import styles from './prenumeration.module.css';
 import { PrenumerationType } from '@/lib/Prenumerationer';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
 import { useState } from 'react';
-import { cookies } from 'next/headers';
-import { Database } from '@/lib/supabase';
-
-async function removeService(user_service_id: number) {
-  'use server';
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const { error } = await supabase.from('user_service')
-}
 
 export default function Item({
   PrenumerationItem,
@@ -80,10 +65,9 @@ export default function Item({
 
         <div className={styles.spaceBetween + ' ' + styles.actionBtn}>
           <a
-            href={PrenumerationItem.uppsägningsUrl}
+            href={`/RemoveServicePage?url=${PrenumerationItem.uppsägningsUrl}`}
             target="_blank"
             className="btn bg-accent h4 text-white"
-            onClick={removeService(1)}
           >
             Avsluta
           </a>
