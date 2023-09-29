@@ -90,7 +90,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 0.75rem;
+  padding: 0.69rem 0.75rem;
   border-radius: var(--radius-border-radius);
 }
 
