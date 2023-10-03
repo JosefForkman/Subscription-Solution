@@ -1,0 +1,22 @@
+.MissingSubscription {
+    text-align: center;
+    padding: 1.5rem 1.06rem;
+    border-radius: var(--radius-border-radius);
+}
+
+.MissingSubscription p {
+    margin-bottom: 3rem;
+}
+
+.MissingSubscription div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.MissingSubscription div button {
+    background-color: transparent;
+    border: transparent;
+    padding: 0.81rem;
+}

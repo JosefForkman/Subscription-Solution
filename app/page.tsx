@@ -1,5 +1,5 @@
 import PrenumerationContent from '@/components/prenumeration/prenumerationContent';
-import { getPrenumerationer } from '@/lib/Prenumerationer';
+import { PrenumerationType, getPrenumerationer } from '@/lib/Prenumerationer';
 import { Database } from '@/lib/supabase';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers'
