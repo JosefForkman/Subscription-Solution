@@ -12,7 +12,7 @@ type FilterContextType = {
 
 export const FilterContext = createContext<FilterContextType | null>(null);
 
-export const FilterContextProvider = ({ children }: { children: React.ReactElement }) => {
+export const FilterContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [filter, setFilter] = useState<tabsType[]>([])
 
     return (<FilterContext.Provider value={{ filter, setFilter }}>

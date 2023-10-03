@@ -4,7 +4,6 @@ import { Database } from '@/lib/supabase';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
-import { cookies } from "next/headers";
 
 export default async function Index() {
   const prenumerationer = await getPrenumerationer();
@@ -23,7 +22,7 @@ export default async function Index() {
 
   return (
     <>
-      return <PrenumerationContent prenumerationer={prenumerationer} user={user} />
+      <PrenumerationContent prenumerationer={prenumerationer} user={user} />
     </>
   );
 }

@@ -1,4 +1,3 @@
-"use client"
 import styles from "./login.module.css";
 import InputText from '@/components/Form/InputText'
 import InputPassword from "@/components/Form/inputPaasword";
@@ -9,13 +8,15 @@ import Image from "next/image";
 import owl from './../../public/svg/owl.svg'
 import { useEffect } from "react";
 import runOneSignal from "@/lib/onesignal";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const dynamic = 'force-dynamic'
 
-export default function Login() {
-    
-    const supabase = createServerComponentClient({ cookies });
+export default async function Login() {
+
+  const supabase = createServerComponentClient({ cookies });
 
   const {
     data: { session },
@@ -23,20 +24,16 @@ export default function Login() {
   if (session) {
     redirect('/');
   }
-
-  const supabase = createClientComponentClient()
-
-  useEffect(() => {
-    setNotification();
-
-    async function setNotification() {
+  if (session) {
+    const setNotification = async () => {
       const { data: { user } } = await supabase.auth.getUser()
 
       if (user) {
         runOneSignal(user.id);
       }
     }
-  }, [])
+    setNotification();
+  }
 
 
   return (
@@ -67,12 +64,8 @@ export default function Login() {
       <p className={'text-center text-black' + ' ' + styles.divider}>eller</p>
 
       <SocialMediaSection />
-      
-      <p className="h4 text-center text-gray">Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link></p>
 
-      <p className="h4 text-center text-gray">
-        Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link>
-      </p>
+      <p className="h4 text-center text-gray">Har du inte ett konto? <Link href="/sign-up">Skapa ett här</Link></p>
     </>
   );
 }
