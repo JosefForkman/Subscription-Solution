@@ -97,8 +97,10 @@ export default function PrenumerationContent({ prenumerationer, user }: { prenum
         </div>
         <FilterTabs prenumerationer={prenumerationer} />
       </section>
+      {/* Check if user have subscription */}
       {prenumerationer.length > 0 ?
         <List prenumerationList={prenumerationer} /> :
+        /* if user not have subscription */
         <MissingSubscription />
       }
 
