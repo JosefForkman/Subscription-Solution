@@ -1,17 +1,25 @@
-'use client';
-import { FilterContextProvider } from '@/lib/Context/filter';
-import styles from './prenumeration.module.css';
-import { PrenumerationType, getPrenumerationer } from '@/lib/Prenumerationer';
-import FilterTabs from '../filterTabs/filterTabs';
-import List from './list';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
+"use client"
+import { FilterContextProvider } from "@/lib/Context/filter";
+import styles from "./prenumeration.module.css";
+import { PrenumerationType } from "@/lib/Prenumerationer";
+import FilterTabs from "../filterTabs/filterTabs";
+import List from "./list";
+import { useContext, useEffect } from "react";
+import runOneSignal from "@/lib/onesignal";
+import { User } from "@supabase/supabase-js";
+import { OneSignalContext } from "@/lib/Context/oneSignal";
+import OneSignal from "react-onesignal";
+import Link from "next/link";
 
-export default function PrenumerationContent({
-  prenumerationer,
-}: {
-  prenumerationer: PrenumerationType[];
-}) {
+export default function PrenumerationContent({ prenumerationer, user }: { prenumerationer: PrenumerationType[], user: User | null }) {
+
+  const contest = useContext(OneSignalContext);
+  if (!contest) {
+    return <p>Notification not working</p>
+  }
+
+  const { oneSignalInitialized, setOneSignalInitialized } = contest;
+
   const totalPrice = prenumerationer.reduce((prevues, current) => {
     if (!current.pris) {
       return 0;
@@ -19,6 +27,28 @@ export default function PrenumerationContent({
 
     return prevues + current.pris;
   }, 0);
+
+  const initializeOneSignal = async (uid: string) => {
+    if (oneSignalInitialized) {
+      return
+    }
+    setOneSignalInitialized(true)
+    await OneSignal.init({
+      appId: process.env.NEXT_PUBLIC_ONESIGNSL_KEY!,
+      notifyButton: {
+        enable: true,
+      },
+
+      allowLocalhostAsSecureOrigin: true,
+    })
+
+    OneSignal.login(uid)
+  }
+  useEffect(() => {
+    if (user) {
+      initializeOneSignal(user.id);
+    }
+  }, [])
 
   return (
     <FilterContextProvider>
@@ -66,13 +96,9 @@ export default function PrenumerationContent({
               </svg>
             </button>
           </div>
-
-          {/* Filter tabs */}
-
-          <FilterTabs prenumerationer={prenumerationer} />
         </section>
-        <List prenumerationList={prenumerationer} />
       </>
+      <List prenumerationList={prenumerationer}/>
     </FilterContextProvider>
-  );
+  )
 }

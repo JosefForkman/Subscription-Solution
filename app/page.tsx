@@ -2,8 +2,8 @@ import PrenumerationContent from '@/components/prenumeration/prenumerationConten
 import { getPrenumerationer } from '@/lib/Prenumerationer';
 import { Database } from '@/lib/supabase';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
-import { cookies } from "next/headers";
 
 export default async function Index() {
   const prenumerationer = await getPrenumerationer();
@@ -17,10 +17,12 @@ export default async function Index() {
   if (!session) {
     redirect('/Onboarding');
   }
+      
+  const { data: { user } } = await supabase.auth.getUser()
 
   return (
     <>
-      <PrenumerationContent prenumerationer={prenumerationer} />
+      <PrenumerationContent prenumerationer={prenumerationer} user={user} />
     </>
   );
 }
