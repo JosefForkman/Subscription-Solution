@@ -1,7 +1,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
-export async function PUT(request: Request) {
+export async function DELETE(request: Request) {
   try {
     console.log('fetch received');
     const { id } = await request.json();

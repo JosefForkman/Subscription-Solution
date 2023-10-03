@@ -16,7 +16,7 @@ export default function Item({
   const callDelete = async () => {
     console.log('try fetch');
     await fetch(`/api/DeleteRecord`, {
-      method: 'put',
+      method: 'delete',
       body: JSON.stringify({ id: PrenumerationItem.user_service_id }),
     });
     setOpen(!isOpen);

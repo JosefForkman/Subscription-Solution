@@ -43,3 +43,33 @@
   padding-block: 0.81rem;
   border-radius: 0.5rem;
 }
+.addButton {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  width: 100%;
+  text-align: center;
+  padding-block: 0.81rem;
+  border-radius: 0.5rem;
+}
+.hideElement {
+  display: none;
+  height: 0px;
+}
+.loadingContainer {
+  height: 3.5rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.loadingDots {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+}

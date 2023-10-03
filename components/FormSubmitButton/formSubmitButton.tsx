@@ -1,14 +1,12 @@
 'use client';
 import { useState } from 'react';
 import styles from './formSubmitButton.module.css';
-import { animate, motion, Variants } from 'framer-motion';
 
 export default function FormSubmitButton() {
   const [isHidden, setIsHidden] = useState(false);
 
   const handleSubmit = () => {
     setIsHidden(!isHidden);
-    console.log('button switched');
   };
 
   //framer motion fun zone
@@ -35,7 +33,7 @@ export default function FormSubmitButton() {
         className={`bg-accent text-white ${
           !isHidden ? styles.addButton : styles.hideElement
         }`}
-        type="submit"
+        type="button"
         onClick={handleSubmit}
       >
         Lägg till
