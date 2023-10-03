@@ -1,5 +1,6 @@
 .MissingSubscription {
     text-align: center;
+    margin-top: 1rem;
     padding: 1.5rem 1.06rem;
     border-radius: var(--radius-border-radius);
 }
