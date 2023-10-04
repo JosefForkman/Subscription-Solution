@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
+import { log } from 'console';
 
 interface dataProps {
   data:
@@ -90,8 +91,8 @@ export default function AddForm({ data }: dataProps) {
         }),
       });
       console.log(respond);
-      
-      refresh()
+
+      refresh();
       push('/');
     } catch (error) {
       setIsDiabled(true);
@@ -123,7 +124,7 @@ export default function AddForm({ data }: dataProps) {
     if (!data) {
       return;
     }
-    setPrice(data[currentService - 1].defualt_price);
+    setPrice(data[currentService].defualt_price);
   };
 
   //  framer motion fun zone
@@ -131,7 +132,7 @@ export default function AddForm({ data }: dataProps) {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.5,
       },
     },
   };
@@ -154,13 +155,11 @@ export default function AddForm({ data }: dataProps) {
           className={`${styles.basicSize} ${
             isNotValidService ? styles.isNotValid : ''
           }`}
-          onChange={(event) =>
-            setCurrentService(parseFloat(event.target.value))
-          }
+          onChange={(event) => setCurrentService(parseInt(event.target.value))}
         >
-          `<option value={0} style={{ display: 'none' }}></option>`
+          <option value={0} style={{ display: 'none' }}></option>
           {data?.map((service, index) => (
-            <option key={index} value={service.service_id}>
+            <option key={index} value={index}>
               {service.name}
             </option>
           ))}
@@ -264,6 +263,7 @@ export default function AddForm({ data }: dataProps) {
       <Link href={'/'} className={`${styles.backButton} bg-white`}>
         Avbryt
       </Link>
+      {console.log(data)}
     </>
   );
 }
