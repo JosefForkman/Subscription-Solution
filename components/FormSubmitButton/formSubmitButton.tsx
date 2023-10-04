@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import styles from './formSubmitButton.module.css';
+import { motion } from 'framer-motion';
 
 export default function FormSubmitButton() {
   const [isHidden, setIsHidden] = useState(false);
