@@ -20,7 +20,7 @@ export type PrenumerationType = {
     user_service_id: number;
 };
 
-export const revalidate = 1000
+// export const revalidate = 1000
 
 export const getPrenumerationer = cache(async () => {
     const supabase = createServerComponentClient<Database>({ cookies });
