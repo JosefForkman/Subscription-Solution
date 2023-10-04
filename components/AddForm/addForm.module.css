@@ -76,3 +76,6 @@
 .isNotValid {
   border: solid red 2px;
 }
+.isdisabled {
+  background-color: lightgray;
+}

@@ -8,15 +8,15 @@ import { z } from 'zod';
 
 interface dataProps {
   data:
-  | {
-    category_id: number | null;
-    defualt_price: number;
-    img_path: string | null;
-    name: string;
-    service_id: number;
-    termination_url: string;
-  }[]
-  | null;
+    | {
+        category_id: number | null;
+        defualt_price: number;
+        img_path: string | null;
+        name: string;
+        service_id: number;
+        termination_url: string;
+      }[]
+    | null;
 }
 
 export default function AddForm({ data }: dataProps) {
@@ -26,10 +26,10 @@ export default function AddForm({ data }: dataProps) {
   const [formEndDate, setFormEndDate] = useState('');
   const [formEndDateMultiplier, setFormEndDateMultiplier] = useState('1');
   const [isHidden, setIsHidden] = useState(false);
-  const [isNotValidService, setIsNotValidservice] = useState(false);
-  const [isNotValidPrice, setIsNotValidPrice] = useState(false);
-  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(false);
-  const [isNotValidEndDate, setIsNotValidEndDate] = useState(false);
+  const [isNotValidService, setIsNotValidservice] = useState(true);
+  const [isNotValidPrice, setIsNotValidPrice] = useState(true);
+  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(true);
+  const [isNotValidEndDate, setIsNotValidEndDate] = useState(true);
   const [isDiabled, setIsDiabled] = useState(true);
 
   const { push } = useRouter();
@@ -56,7 +56,6 @@ export default function AddForm({ data }: dataProps) {
     const serviceCheck = z.number().gt(0);
     const signUpCheck = z.string().min(1);
     const formEndCheck = z.string().min(1);
-    const formEndMultiCheck = z.string().min(1);
 
     if (serviceCheck.safeParse(currentService).success) {
       setIsNotValidservice(false);
@@ -73,7 +72,6 @@ export default function AddForm({ data }: dataProps) {
     if (formDataSchema.safeParse(formData).success) {
       setIsDiabled(false);
     }
-
 
     // console.log(formDataSchema.safeParse(formData).success);
   }, [price, currentService, sign_up_date, formEndDate, formEndDateMultiplier]);
@@ -92,8 +90,8 @@ export default function AddForm({ data }: dataProps) {
         }),
       });
       console.log(respond);
-      
-      push('/')
+
+      push('/');
     } catch (error) {
       setIsDiabled(true);
     }
@@ -152,8 +150,9 @@ export default function AddForm({ data }: dataProps) {
         <select
           name="service"
           id="service"
-          className={`${styles.basicSize} ${isNotValidService ? styles.isNotValid : ''
-            }`}
+          className={`${styles.basicSize} ${
+            isNotValidService ? styles.isNotValid : ''
+          }`}
           onChange={(event) =>
             setCurrentService(parseFloat(event.target.value))
           }
@@ -176,8 +175,9 @@ export default function AddForm({ data }: dataProps) {
             type="number"
             value={price}
             onChange={(event) => setPrice(Number.parseInt(event.target.value))}
-            className={`${styles.basicSize} ${isNotValidPrice ? styles.isNotValid : ''
-              }`}
+            className={`${styles.basicSize} ${
+              isNotValidPrice ? styles.isNotValid : ''
+            }`}
           />
           <button
             className={`${styles.basicSize} bg-accent text-white`}
@@ -195,8 +195,9 @@ export default function AddForm({ data }: dataProps) {
           name="startDate"
           id="startDate"
           type="date"
-          className={`${styles.basicSize} ${isNotValidSignUpDate ? styles.isNotValid : ''
-            }`}
+          className={`${styles.basicSize} ${
+            isNotValidSignUpDate ? styles.isNotValid : ''
+          }`}
           onChange={(event) => setSign_up_date(event.target.value)}
         />
       </div>
@@ -208,8 +209,9 @@ export default function AddForm({ data }: dataProps) {
             id="endDate"
             type="number"
             placeholder="00"
-            className={`${styles.basicSize} ${isNotValidEndDate ? styles.isNotValid : ''
-              }`}
+            className={`${styles.basicSize} ${
+              isNotValidEndDate ? styles.isNotValid : ''
+            }`}
             onChange={(event) => {
               setFormEndDate(event.target.value);
             }}
@@ -228,8 +230,9 @@ export default function AddForm({ data }: dataProps) {
         </div>
       </div>
       <button
-        className={`bg-accent text-white ${!isHidden ? styles.addButton : styles.hideElement
-          }`}
+        className={`text-white ${
+          !isHidden ? styles.addButton : styles.hideElement
+        } ${isDiabled ? styles.isdisabled : 'bg-accent'}`}
         type="button"
         disabled={isDiabled}
         onClick={handleSubmit}
@@ -237,8 +240,9 @@ export default function AddForm({ data }: dataProps) {
         Lägg till
       </button>
       <motion.div
-        className={`${isHidden ? styles.loadingContainer : styles.hideElement
-          } bg-accent text-white `}
+        className={`${
+          isHidden ? styles.loadingContainer : styles.hideElement
+        } bg-accent text-white `}
         variants={loadingContainerVariants}
         initial={false}
         animate={isHidden ? 'show' : 'hidden'}
