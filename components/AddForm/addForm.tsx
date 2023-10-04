@@ -32,7 +32,7 @@ export default function AddForm({ data }: dataProps) {
   const [isNotValidEndDate, setIsNotValidEndDate] = useState(true);
   const [isDiabled, setIsDiabled] = useState(true);
 
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
 
   const formDataSchema = z.object({
     enter_price: z.number().gt(0),
@@ -90,7 +90,8 @@ export default function AddForm({ data }: dataProps) {
         }),
       });
       console.log(respond);
-
+      
+      refresh()
       push('/');
     } catch (error) {
       setIsDiabled(true);
