@@ -4,6 +4,8 @@ import styles from './addForm.module.css';
 import { useEffect, useState } from 'react';
 import { animate, motion, Variants } from 'framer-motion';
 import { redirect } from 'next/navigation';
+import { z } from 'zod';
+import { type } from 'os';
 
 interface dataProps {
   data:
@@ -19,12 +21,60 @@ interface dataProps {
 }
 
 export default function AddForm({ data }: dataProps) {
-  const [currentService, setCurrentService] = useState<number>(1);
+  const [currentService, setCurrentService] = useState<number>(0);
   const [price, setPrice] = useState(0);
-  const [isHidden, setIsHidden] = useState(false);
-  const [formEndDateMultiplier, setFormEndDateMultiplier] = useState('1');
-  const [formEndDate, setFormEndDate] = useState('');
   const [sign_up_date, setSign_up_date] = useState('');
+  const [formEndDate, setFormEndDate] = useState('');
+  const [formEndDateMultiplier, setFormEndDateMultiplier] = useState('1');
+  const [isHidden, setIsHidden] = useState(false);
+  const [isNotValidService, setIsNotValidservice] = useState(true);
+  const [isNotValidPrice, setIsNotValidPrice] = useState(true);
+  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(true);
+  const [isNotValidEndDate, setIsNotValidEndDate] = useState(true);
+  const [isDiabled, setIsDiabled] = useState(true);
+
+  const formDataSchema = z.object({
+    enter_price: z.number().gt(0),
+    service_id: z.number().gt(0),
+    sign_up_date: z.string().min(1),
+    formEndDate: z.string().min(1),
+    formEndDateMultiplier: z.string().min(1),
+  });
+
+  type FormData = z.infer<typeof formDataSchema>;
+
+  useEffect(() => {
+    let formData = {
+      enter_price: price,
+      service_id: currentService,
+      sign_up_date: sign_up_date,
+      formEndDate: formEndDate,
+      formEndDateMultiplier: formEndDateMultiplier,
+    };
+    const priceCheck = z.number().gt(0);
+    const serviceCheck = z.number().gt(0);
+    const signUpCheck = z.string().min(1);
+    const formEndCheck = z.string().min(1);
+    const formEndMultiCheck = z.string().min(1);
+
+    if (serviceCheck.safeParse(currentService).success) {
+      setIsNotValidservice(false);
+    }
+    if (priceCheck.safeParse(price).success) {
+      setIsNotValidPrice(false);
+    }
+    if (signUpCheck.safeParse(sign_up_date).success) {
+      setIsNotValidSignUpDate(false);
+    }
+    if (formEndCheck.safeParse(formEndDate).success) {
+      setIsNotValidEndDate(false);
+    }
+    if (formDataSchema.safeParse(formData).success) {
+      setIsDiabled(false);
+    }
+
+    // console.log(formDataSchema.safeParse(formData).success);
+  }, [price, currentService, sign_up_date, formEndDate, formEndDateMultiplier]);
 
   const callAdd = async (termDate: string) => {
     console.log('try fetch');
@@ -94,11 +144,14 @@ export default function AddForm({ data }: dataProps) {
         <select
           name="service"
           id="service"
-          className={styles.basicSize}
+          className={`${styles.basicSize} ${
+            isNotValidService ? styles.isNotValid : ''
+          }`}
           onChange={(event) =>
             setCurrentService(parseFloat(event.target.value))
           }
         >
+          `<option value={0} style={{ display: 'none' }}></option>`
           {data?.map((service, index) => (
             <option key={index} value={service.service_id}>
               {service.name}
@@ -116,7 +169,9 @@ export default function AddForm({ data }: dataProps) {
             type="number"
             value={price}
             onChange={(event) => setPrice(Number.parseInt(event.target.value))}
-            className={styles.basicSize}
+            className={`${styles.basicSize} ${
+              isNotValidPrice ? styles.isNotValid : ''
+            }`}
           />
           <button
             className={`${styles.basicSize} bg-accent text-white`}
@@ -134,7 +189,9 @@ export default function AddForm({ data }: dataProps) {
           name="startDate"
           id="startDate"
           type="date"
-          className={styles.basicSize}
+          className={`${styles.basicSize} ${
+            isNotValidSignUpDate ? styles.isNotValid : ''
+          }`}
           onChange={(event) => setSign_up_date(event.target.value)}
         />
       </div>
@@ -146,7 +203,9 @@ export default function AddForm({ data }: dataProps) {
             id="endDate"
             type="number"
             placeholder="00"
-            className={styles.basicSize}
+            className={`${styles.basicSize} ${
+              isNotValidEndDate ? styles.isNotValid : ''
+            }`}
             onChange={(event) => {
               setFormEndDate(event.target.value);
             }}
@@ -169,6 +228,7 @@ export default function AddForm({ data }: dataProps) {
           !isHidden ? styles.addButton : styles.hideElement
         }`}
         type="button"
+        disabled={isDiabled}
         onClick={handleSubmit}
       >
         Lägg till

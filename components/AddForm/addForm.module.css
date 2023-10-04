@@ -73,3 +73,6 @@
   background-color: white;
   border-radius: 1rem;
 }
+.isNotValid {
+  border: solid red 2px;
+}
