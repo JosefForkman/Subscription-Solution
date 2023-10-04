@@ -2,22 +2,21 @@
 import Link from 'next/link';
 import styles from './addForm.module.css';
 import { useEffect, useState } from 'react';
-import { animate, motion, Variants } from 'framer-motion';
-import { redirect } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import { type } from 'os';
 
 interface dataProps {
   data:
-    | {
-        category_id: number | null;
-        defualt_price: number;
-        img_path: string | null;
-        name: string;
-        service_id: number;
-        termination_url: string;
-      }[]
-    | null;
+  | {
+    category_id: number | null;
+    defualt_price: number;
+    img_path: string | null;
+    name: string;
+    service_id: number;
+    termination_url: string;
+  }[]
+  | null;
 }
 
 export default function AddForm({ data }: dataProps) {
@@ -27,11 +26,13 @@ export default function AddForm({ data }: dataProps) {
   const [formEndDate, setFormEndDate] = useState('');
   const [formEndDateMultiplier, setFormEndDateMultiplier] = useState('1');
   const [isHidden, setIsHidden] = useState(false);
-  const [isNotValidService, setIsNotValidservice] = useState(true);
-  const [isNotValidPrice, setIsNotValidPrice] = useState(true);
-  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(true);
-  const [isNotValidEndDate, setIsNotValidEndDate] = useState(true);
+  const [isNotValidService, setIsNotValidservice] = useState(false);
+  const [isNotValidPrice, setIsNotValidPrice] = useState(false);
+  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(false);
+  const [isNotValidEndDate, setIsNotValidEndDate] = useState(false);
   const [isDiabled, setIsDiabled] = useState(true);
+
+  const { push } = useRouter();
 
   const formDataSchema = z.object({
     enter_price: z.number().gt(0),
@@ -73,22 +74,29 @@ export default function AddForm({ data }: dataProps) {
       setIsDiabled(false);
     }
 
+
     // console.log(formDataSchema.safeParse(formData).success);
   }, [price, currentService, sign_up_date, formEndDate, formEndDateMultiplier]);
 
   const callAdd = async (termDate: string) => {
     console.log('try fetch');
     console.log(termDate);
-    await fetch(`/api/AddRecord`, {
-      method: 'post',
-      body: JSON.stringify({
-        enterd_price: price,
-        service_id: currentService,
-        sign_up_date: sign_up_date,
-        termination_date: termDate,
-      }),
-    });
-    redirect('/');
+    try {
+      const respond = await fetch(`/api/AddRecord`, {
+        method: 'post',
+        body: JSON.stringify({
+          enterd_price: price,
+          service_id: currentService,
+          sign_up_date: sign_up_date,
+          termination_date: termDate,
+        }),
+      });
+      console.log(respond);
+      
+      push('/')
+    } catch (error) {
+      setIsDiabled(true);
+    }
   };
 
   const handleSubmit = () => {
@@ -144,9 +152,8 @@ export default function AddForm({ data }: dataProps) {
         <select
           name="service"
           id="service"
-          className={`${styles.basicSize} ${
-            isNotValidService ? styles.isNotValid : ''
-          }`}
+          className={`${styles.basicSize} ${isNotValidService ? styles.isNotValid : ''
+            }`}
           onChange={(event) =>
             setCurrentService(parseFloat(event.target.value))
           }
@@ -169,9 +176,8 @@ export default function AddForm({ data }: dataProps) {
             type="number"
             value={price}
             onChange={(event) => setPrice(Number.parseInt(event.target.value))}
-            className={`${styles.basicSize} ${
-              isNotValidPrice ? styles.isNotValid : ''
-            }`}
+            className={`${styles.basicSize} ${isNotValidPrice ? styles.isNotValid : ''
+              }`}
           />
           <button
             className={`${styles.basicSize} bg-accent text-white`}
@@ -189,9 +195,8 @@ export default function AddForm({ data }: dataProps) {
           name="startDate"
           id="startDate"
           type="date"
-          className={`${styles.basicSize} ${
-            isNotValidSignUpDate ? styles.isNotValid : ''
-          }`}
+          className={`${styles.basicSize} ${isNotValidSignUpDate ? styles.isNotValid : ''
+            }`}
           onChange={(event) => setSign_up_date(event.target.value)}
         />
       </div>
@@ -203,9 +208,8 @@ export default function AddForm({ data }: dataProps) {
             id="endDate"
             type="number"
             placeholder="00"
-            className={`${styles.basicSize} ${
-              isNotValidEndDate ? styles.isNotValid : ''
-            }`}
+            className={`${styles.basicSize} ${isNotValidEndDate ? styles.isNotValid : ''
+              }`}
             onChange={(event) => {
               setFormEndDate(event.target.value);
             }}
@@ -224,9 +228,8 @@ export default function AddForm({ data }: dataProps) {
         </div>
       </div>
       <button
-        className={`bg-accent text-white ${
-          !isHidden ? styles.addButton : styles.hideElement
-        }`}
+        className={`bg-accent text-white ${!isHidden ? styles.addButton : styles.hideElement
+          }`}
         type="button"
         disabled={isDiabled}
         onClick={handleSubmit}
@@ -234,9 +237,8 @@ export default function AddForm({ data }: dataProps) {
         Lägg till
       </button>
       <motion.div
-        className={`${
-          isHidden ? styles.loadingContainer : styles.hideElement
-        } bg-accent text-white `}
+        className={`${isHidden ? styles.loadingContainer : styles.hideElement
+          } bg-accent text-white `}
         variants={loadingContainerVariants}
         initial={false}
         animate={isHidden ? 'show' : 'hidden'}
