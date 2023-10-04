@@ -124,7 +124,8 @@ export default function AddForm({ data }: dataProps) {
     if (!data) {
       return;
     }
-    setPrice(data[currentService].defualt_price);
+    const i = data.findIndex((e) => e.service_id == currentService);
+    setPrice(data[i].defualt_price);
   };
 
   //  framer motion fun zone
@@ -159,7 +160,7 @@ export default function AddForm({ data }: dataProps) {
         >
           <option value={0} style={{ display: 'none' }}></option>
           {data?.map((service, index) => (
-            <option key={index} value={index}>
+            <option key={index} value={service.service_id}>
               {service.name}
             </option>
           ))}
@@ -263,7 +264,6 @@ export default function AddForm({ data }: dataProps) {
       <Link href={'/'} className={`${styles.backButton} bg-white`}>
         Avbryt
       </Link>
-      {console.log(data)}
     </>
   );
 }
