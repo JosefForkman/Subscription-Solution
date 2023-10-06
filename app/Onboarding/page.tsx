@@ -19,7 +19,7 @@ export default async function Onboarding() {
       <Carusel />
       <div className={styles.buttonContainer}>
         <Link
-          href={'/sign-up'}
+          href={'/GDPL'}
           className={` btn bg-accent text-white h1 ${styles.linkBtn}`}
         >
           <p>Skapa Konto</p>

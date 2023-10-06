@@ -14,7 +14,11 @@ export default function Navbar() {
   const handleLinkClick: MouseEventHandler<HTMLAnchorElement> = (
     event: any
   ) => {
-    if (event.currentTarget.href === location.origin + '/') {
+    if (
+      event.currentTarget.href === location.origin + '/' ||
+      event.currentTarget.href === location.origin + '/AddService' ||
+      event.currentTarget.href === location.origin + '/UpdateService'
+    ) {
       setCurrentPath('/');
     } else if (event.currentTarget.href === location.origin + '/More') {
       setCurrentPath('/More');
