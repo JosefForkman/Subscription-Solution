@@ -81,9 +81,8 @@ export default function UpdateForm({ data }: dataProps) {
       formEndDate: formEndDate,
       formEndDateMultiplier: formEndDateMultiplier,
     };
-    const priceCheck = z.number().gt(0);
 
-    if (priceCheck.safeParse(price).success) {
+    if (formDataSchema.shape.enter_price.safeParse(price)) {
       setIsNotValidPrice(false);
     } else {
       setIsNotValidPrice(true);

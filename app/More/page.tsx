@@ -11,6 +11,7 @@ import termsOfService from './../../public/svg/termsOfService.svg';
 import support from './../../public/svg/customerSupport.svg';
 import GDPR from './../../public/svg/gdpr.svg';
 import secrecy from './../../public/svg/secrecy.svg';
+import LogoutButton from '@/components/LogoutButton/LogoutButton';
 
 const icons = [
   profile,
@@ -46,6 +47,7 @@ export default async function More() {
       {icons.map((icon, index) => (
         <MoreButtons key={index} img={icon} text={texts[index]} />
       ))}
+      <LogoutButton />
     </>
   );
 }

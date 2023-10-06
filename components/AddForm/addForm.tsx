@@ -46,32 +46,38 @@ export default function AddForm({ data }: dataProps) {
   type FormData = z.infer<typeof formDataSchema>;
 
   useEffect(() => {
-    let formData = {
+    let formData: FormData = {
       enter_price: price,
       service_id: currentService,
       sign_up_date: sign_up_date,
       formEndDate: formEndDate,
       formEndDateMultiplier: formEndDateMultiplier,
     };
-    const priceCheck = z.number().gt(0);
-    const serviceCheck = z.number().gt(0);
-    const signUpCheck = z.string().min(1);
-    const formEndCheck = z.string().min(1);
 
-    if (serviceCheck.safeParse(currentService).success) {
+    if (formDataSchema.shape.service_id.safeParse(currentService).success) {
       setIsNotValidservice(false);
+    } else {
+      setIsNotValidservice(true);
     }
-    if (priceCheck.safeParse(price).success) {
+    if (formDataSchema.shape.enter_price.safeParse(price).success) {
       setIsNotValidPrice(false);
+    } else {
+      setIsNotValidPrice(true);
     }
-    if (signUpCheck.safeParse(sign_up_date).success) {
+    if (formDataSchema.shape.sign_up_date.safeParse(sign_up_date).success) {
       setIsNotValidSignUpDate(false);
+    } else {
+      setIsNotValidSignUpDate(true);
     }
-    if (formEndCheck.safeParse(formEndDate).success) {
+    if (formDataSchema.shape.formEndDate.safeParse(formEndDate).success) {
       setIsNotValidEndDate(false);
+    } else {
+      setIsNotValidEndDate(true);
     }
     if (formDataSchema.safeParse(formData).success) {
       setIsDiabled(false);
+    } else {
+      setIsDiabled(true);
     }
 
     // console.log(formDataSchema.safeParse(formData).success);
