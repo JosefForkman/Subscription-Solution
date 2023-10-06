@@ -29,7 +29,7 @@ export default function Item({
       <div onClick={() => setOpen(!isOpen)}>
         {PrenumerationItem.bild ? (
           <Image
-            src={`/${PrenumerationItem.bild.toLocaleUpperCase()}`}
+            src={`/${PrenumerationItem.bild}`}
             width={56}
             height={56}
             alt={PrenumerationItem.bild}
