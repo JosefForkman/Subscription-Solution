@@ -2,15 +2,15 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import AddForm from '@/components/AddForm/addForm';
 import styles from './../../components/AddForm/addForm.module.css';
+import UpdateForm from '@/components/UpdateForm/updateForm';
 
 async function sendBack() {
   'use server';
   redirect('/');
 }
 
-export default async function addService() {
+export default async function UpdateService() {
   'use server';
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
@@ -28,7 +28,7 @@ export default async function addService() {
     <>
       <h1 className={styles.addH1}>Lägg till prenumeration</h1>
       <form className={styles.addForm}>
-        <AddForm data={data} />
+        <UpdateForm data={data} />
       </form>
     </>
   );

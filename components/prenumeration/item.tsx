@@ -3,6 +3,8 @@
 import styles from './prenumeration.module.css';
 import { PrenumerationType } from '@/lib/Prenumerationer';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Item({
@@ -11,6 +13,16 @@ export default function Item({
   PrenumerationItem: PrenumerationType;
 }) {
   const [isOpen, setOpen] = useState(false);
+  const router = useRouter();
+  const callDelete = async () => {
+    console.log('try fetch');
+    await fetch(`/api/DeleteRecord`, {
+      method: 'delete',
+      body: JSON.stringify({ id: PrenumerationItem.user_service_id }),
+    });
+    setOpen(!isOpen);
+    router.refresh();
+  };
 
   return (
     <li className={isOpen ? `${styles['active']} bg-white` : 'bg-white'}>
@@ -64,15 +76,30 @@ export default function Item({
         </div>
 
         <div className={styles.spaceBetween + ' ' + styles.actionBtn}>
-          <a
-            href={PrenumerationItem.uppsägningsUrl}
-            target="_blank"
+          <button
+            // href={`${PrenumerationItem.uppsägningsUrl}`}
+            // target="_blank"
             className="btn bg-accent h4 text-white"
+            onClick={callDelete}
           >
             Avsluta
-          </a>
+          </button>
           <button className="btn bg-accent h4 text-white">Historik</button>
-          <button className="btn bg-accent h4 text-white">Ändra</button>
+          <Link
+            href={{
+              pathname: '/UpdateService',
+              query: {
+                sentID: PrenumerationItem.user_service_id,
+                sentPrice: PrenumerationItem.pris,
+                sentServiceName: PrenumerationItem.namn,
+                sentSignUpDate: PrenumerationItem.bindningstid,
+                sentTermDate: PrenumerationItem.Uppsägningstid,
+              },
+            }}
+            className="btn bg-accent h4 text-white"
+          >
+            Ändra
+          </Link>
         </div>
       </div>
     </li>

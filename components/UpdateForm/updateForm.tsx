@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
-import styles from './addForm.module.css';
+import styles from './updateForm.module.css';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { nullable, z } from 'zod';
 import { log } from 'console';
 
 interface dataProps {
@@ -20,17 +20,45 @@ interface dataProps {
     | null;
 }
 
-export default function AddForm({ data }: dataProps) {
-  const [currentService, setCurrentService] = useState<number>(0);
-  const [price, setPrice] = useState(0);
+export default function UpdateForm({ data }: dataProps) {
+  const searchParams = useSearchParams();
+
+  // this and the next loop is to get rid of the string | null type from the search params
+  const paramNamesNumbers = ['sentPrice', 'sentID'];
+  const importedParamsNumbers: { [key: string]: number } = {};
+
+  paramNamesNumbers.forEach((paramName) => {
+    const paramValue = searchParams.get(paramName);
+    importedParamsNumbers[paramName] =
+      paramValue !== null ? parseInt(paramValue) : 0;
+  });
+
+  const paramNamesStrings = [
+    'sentServiceName',
+    'sentSignUpDate',
+    'sentTermDate',
+  ];
+  const importedParamsStrings: { [key: string]: string } = {};
+
+  paramNamesStrings.forEach((paramName) => {
+    const paramValue = searchParams.get(paramName);
+    importedParamsStrings[paramName] = paramValue !== null ? paramValue : '';
+  });
+
+  let serviceNameId = 0;
+  if (data != null) {
+    serviceNameId = data.findIndex(
+      (obj) => obj.name == importedParamsStrings['sentServiceName']
+    );
+  }
+
+  const [currentService, setCurrentService] = useState<number>(serviceNameId);
+  const [price, setPrice] = useState(importedParamsNumbers['sentPrice']);
   const [sign_up_date, setSign_up_date] = useState('');
   const [formEndDate, setFormEndDate] = useState('');
   const [formEndDateMultiplier, setFormEndDateMultiplier] = useState('1');
   const [isHidden, setIsHidden] = useState(false);
-  const [isNotValidService, setIsNotValidservice] = useState(true);
   const [isNotValidPrice, setIsNotValidPrice] = useState(true);
-  const [isNotValidSignUpDate, setIsNotValidSignUpDate] = useState(true);
-  const [isNotValidEndDate, setIsNotValidEndDate] = useState(true);
   const [isDiabled, setIsDiabled] = useState(true);
 
   const { push, refresh } = useRouter();
@@ -38,56 +66,45 @@ export default function AddForm({ data }: dataProps) {
   const formDataSchema = z.object({
     enter_price: z.number().gt(0),
     service_id: z.number().gt(0),
-    sign_up_date: z.string().min(1),
-    formEndDate: z.string().min(1),
-    formEndDateMultiplier: z.string().min(1),
+    sign_up_date: z.string().optional(),
+    formEndDate: z.string().optional(),
+    formEndDateMultiplier: z.string().min(1).optional(),
   });
 
   type FormData = z.infer<typeof formDataSchema>;
 
   useEffect(() => {
-    let formData = {
+    let formData: FormData = {
       enter_price: price,
       service_id: currentService,
-      sign_up_date: sign_up_date,
+      sign_up_date: importedParamsStrings['sentSignUpDate'],
       formEndDate: formEndDate,
       formEndDateMultiplier: formEndDateMultiplier,
     };
     const priceCheck = z.number().gt(0);
-    const serviceCheck = z.number().gt(0);
-    const signUpCheck = z.string().min(1);
-    const formEndCheck = z.string().min(1);
 
-    if (serviceCheck.safeParse(currentService).success) {
-      setIsNotValidservice(false);
-    }
     if (priceCheck.safeParse(price).success) {
       setIsNotValidPrice(false);
-    }
-    if (signUpCheck.safeParse(sign_up_date).success) {
-      setIsNotValidSignUpDate(false);
-    }
-    if (formEndCheck.safeParse(formEndDate).success) {
-      setIsNotValidEndDate(false);
+    } else {
+      setIsNotValidPrice(true);
     }
     if (formDataSchema.safeParse(formData).success) {
       setIsDiabled(false);
+    } else {
+      setIsDiabled(true);
     }
-
-    // console.log(formDataSchema.safeParse(formData).success);
   }, [price, currentService, sign_up_date, formEndDate, formEndDateMultiplier]);
 
-  const callAdd = async (termDate: string) => {
+  const callUpdate = async (termDate: string) => {
     console.log('try fetch');
     console.log(termDate);
     try {
-      const respond = await fetch(`/api/AddRecord`, {
-        method: 'post',
+      const respond = await fetch(`/api/UpdateRecord`, {
+        method: 'put',
         body: JSON.stringify({
           enterd_price: price,
-          service_id: currentService,
-          sign_up_date: sign_up_date,
           termination_date: termDate,
+          user_service_id: importedParamsNumbers['sentID'],
         }),
       });
       console.log(respond);
@@ -105,17 +122,18 @@ export default function AddForm({ data }: dataProps) {
       const endDate = parseInt(formEndDate);
       const endDateMultiplier = parseInt(formEndDateMultiplier);
       const currentDate = new Date();
-      if (endDateMultiplier == 30) {
+      if (endDateMultiplier == 30 && endDate > 0) {
         const newEndDate = currentDate.setMonth(
           currentDate.getMonth() + endDate
         );
-        callAdd(new Date(newEndDate).toISOString());
-      }
-      if (endDateMultiplier == 1) {
+        callUpdate(new Date(newEndDate).toISOString());
+      } else if (endDateMultiplier == 1 && endDate > 0) {
         const currentDay = currentDate.getDate();
         const midDate = new Date(currentDate);
         const newEndDate = midDate.setDate(currentDay + endDate);
-        callAdd(new Date(newEndDate).toISOString());
+        callUpdate(new Date(newEndDate).toISOString());
+      } else {
+        callUpdate(importedParamsStrings['sentTermDate']);
       }
     }
   };
@@ -150,21 +168,13 @@ export default function AddForm({ data }: dataProps) {
     <>
       <div className={styles.subsection}>
         <label htmlFor="service">Tjänsts</label>
-        <select
+        <input
           name="service"
           id="service"
-          className={`${styles.basicSize} ${
-            isNotValidService ? styles.isNotValid : ''
-          }`}
-          onChange={(event) => setCurrentService(parseInt(event.target.value))}
-        >
-          <option value={0} style={{ display: 'none' }}></option>
-          {data?.map((service, index) => (
-            <option key={index} value={service.service_id}>
-              {service.name}
-            </option>
-          ))}
-        </select>
+          className={`${styles.basicSize} bg-white`}
+          disabled
+          value={importedParamsStrings['sentServiceName']}
+        ></input>
       </div>
 
       <div className={styles.subsection}>
@@ -195,10 +205,10 @@ export default function AddForm({ data }: dataProps) {
         <input
           name="startDate"
           id="startDate"
-          type="date"
-          className={`${styles.basicSize} ${
-            isNotValidSignUpDate ? styles.isNotValid : ''
-          }`}
+          type="string"
+          disabled
+          value={importedParamsStrings['sentSignUpDate']}
+          className={`${styles.basicSize} bg-white`}
           onChange={(event) => setSign_up_date(event.target.value)}
         />
       </div>
@@ -210,9 +220,7 @@ export default function AddForm({ data }: dataProps) {
             id="endDate"
             type="number"
             placeholder="00"
-            className={`${styles.basicSize} ${
-              isNotValidEndDate ? styles.isNotValid : ''
-            }`}
+            className={`${styles.basicSize} `}
             onChange={(event) => {
               setFormEndDate(event.target.value);
             }}
@@ -238,7 +246,7 @@ export default function AddForm({ data }: dataProps) {
         disabled={isDiabled}
         onClick={handleSubmit}
       >
-        Lägg till
+        Ändra
       </button>
       <motion.div
         className={`${

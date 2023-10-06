@@ -1,18 +1,14 @@
-import styles from "./login.module.css";
-import InputText from '@/components/Form/InputText'
-import InputPassword from "@/components/Form/inputPaasword";
-import Link from 'next/link'
-import Messages from './messages'
-import SocialMediaSection from "@/components/SocialMedia/SocialMediaSection";
-import Image from "next/image";
-import owl from './../../public/svg/owl.svg'
-import { useEffect } from "react";
-import runOneSignal from "@/lib/onesignal";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-
-export const dynamic = 'force-dynamic'
+import styles from './login.module.css';
+import InputText from '@/components/Form/InputText';
+import InputPassword from '@/components/Form/inputPaasword';
+import Link from 'next/link';
+import Messages from './messages';
+import SocialMediaSection from '@/components/SocialMedia/SocialMediaSection';
+import Image from 'next/image';
+import owl from './../../public/svg/logo.svg';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export default async function Login() {
 
