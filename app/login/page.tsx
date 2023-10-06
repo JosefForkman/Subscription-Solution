@@ -20,16 +20,6 @@ export default async function Login() {
   if (session) {
     redirect('/');
   }
-  if (session) {
-    const setNotification = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-
-      if (user) {
-        runOneSignal(user.id);
-      }
-    }
-    setNotification();
-  }
 
 
   return (
